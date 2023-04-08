@@ -1,0 +1,46 @@
+[gd_scene load_steps=9 format=3 uid="uid://crluqsg0k34cf"]
+
+[ext_resource type="Script" path="res://Script/baggy.gd" id="1_i68r0"]
+[ext_resource type="Texture2D" uid="uid://4x4fh2h1u7ij" path="res://icon.svg" id="1_y2tws"]
+[ext_resource type="PackedScene" uid="uid://bbxoxogf1kaei" path="res://Scenes/fsm.tscn" id="3_jw38x"]
+[ext_resource type="Script" path="res://Script/idleBaggy.gd" id="4_yoc1d"]
+[ext_resource type="Script" path="res://Script/groundedBaggy.gd" id="5_xnj7j"]
+[ext_resource type="Script" path="res://Script/onAirBaggy.gd" id="6_as1kb"]
+[ext_resource type="Script" path="res://Scenes/aiming.gd" id="7_ah48f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cht7h"]
+size = Vector2(133, 130)
+
+[node name="baggy" type="CharacterBody2D"]
+collision_mask = 3
+script = ExtResource("1_i68r0")
+
+[node name="coll_baggy" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_cht7h")
+
+[node name="sprite_baggy" type="Sprite2D" parent="."]
+texture = ExtResource("1_y2tws")
+
+[node name="FSM" parent="." instance=ExtResource("3_jw38x")]
+
+[node name="idle" type="Node" parent="FSM"]
+script = ExtResource("4_yoc1d")
+
+[node name="grounded" type="Node" parent="FSM"]
+script = ExtResource("5_xnj7j")
+
+[node name="onAir" type="Node" parent="FSM"]
+script = ExtResource("6_as1kb")
+
+[node name="aiming" type="Node" parent="FSM"]
+script = ExtResource("7_ah48f")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.2, 1.2)
+
+[node name="wait" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[editable path="FSM"]
