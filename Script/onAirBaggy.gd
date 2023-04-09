@@ -31,6 +31,10 @@ func _physics_update(delta):
 	if Input.is_action_pressed("jump"):
 		jumpTime += jumpTime + 0.1
 		
+	if Input.is_action_just_pressed("jump"):
+		jumpTime = 0
+		baggy.velocity.y += lerp(baggy.velocity.y, baggy.JUMP_MAX, 0.2) * delta
+		
 	var direction = Input.get_axis("left", "right")
 	
 	if Input.is_action_just_pressed("dash") and !baggy.dashing:
