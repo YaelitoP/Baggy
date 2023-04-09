@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://b85taoag0kuik"]
+[gd_scene load_steps=5 format=3 uid="uid://b85taoag0kuik"]
 
 [ext_resource type="Script" path="res://Script/bullet.gd" id="1_domf5"]
 [ext_resource type="Texture2D" uid="uid://4x4fh2h1u7ij" path="res://icon.svg" id="1_u3v8g"]
@@ -7,10 +7,16 @@
 radius = 6.06716
 height = 21.9983
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4muoh"]
+radius = 6.0
+height = 22.0
+
 [node name="bullet" type="RigidBody2D"]
 collision_layer = 16
 collision_mask = 6
-mass = 0.5
+mass = 0.26
+gravity_scale = 0.8
+continuous_cd = 1
 script = ExtResource("1_domf5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -22,3 +28,13 @@ position = Vector2(7.45058e-09, 2.38419e-07)
 rotation = 1.5708
 scale = Vector2(0.0766328, 0.146996)
 texture = ExtResource("1_u3v8g")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_4muoh")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
