@@ -42,19 +42,14 @@ func movement(direction):
 		
 		if Input.is_action_just_pressed("dash"):
 			baggy.wait.start()
-			dash()
+			baggy.dash()
 	elif baggy.dashing and baggy.wait.time_left != 0:
 		baggy.velocity.x = direction * baggy.DASH_SPEED
 	else:
-		dash()
+		baggy.dash()
 		baggy.velocity.x = move_toward(baggy.velocity.x, 0, baggy.speed)
 	
 
-func dash():
-	if baggy.wait.time_left != 0:
-		baggy.dashing = true
-	if baggy.wait.time_left == 0:
-		baggy.dashing = false
 
 
 
