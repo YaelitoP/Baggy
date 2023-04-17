@@ -24,7 +24,7 @@ func _ready():
 
 func _physics_process(delta):
 	move_and_slide()
-	
+	side_facing()
 	pass
 
 
@@ -35,6 +35,15 @@ func dash():
 		dashing = false
 
 func shooting():
+	
+	if reload.time_left == 0:
+		bullet = bullet_path.instantiate()
+		add_child(bullet)
+		bullet.apply_central_impulse(aiming * bullet.speed)
+		reload.start()
+
+func side_facing():
+	
 	if Input.is_action_just_pressed("left"):
 		aiming = Vector2.LEFT
 		looking = aiming
@@ -57,10 +66,3 @@ func shooting():
 		
 	if Input.is_action_pressed("left") and (Input.is_action_pressed("up") or Input.is_action_pressed("crounch")):
 		aiming = Input.get_vector("left", "right", "up", "crounch")
-
-	
-	if reload.time_left == 0:
-		bullet = bullet_path.instantiate()
-		add_child(bullet)
-		bullet.apply_central_impulse(aiming * bullet.speed)
-		reload.start()
