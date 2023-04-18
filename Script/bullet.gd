@@ -1,5 +1,5 @@
 extends RigidBody2D
-
+class_name baseBullet
 
 const MAX_RANGE: float = 12000.0
 @onready var speed: float = 5000.0
@@ -16,6 +16,6 @@ func _physics_process(delta):
 		queue_free()
 
 
-func _on_area_2d_body_entered(body):
+func _on_area_2d_body_entered(_body):
 	queue_free()
 	pass # Replace with function body.

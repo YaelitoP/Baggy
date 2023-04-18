@@ -1,0 +1,112 @@
+[gd_scene load_steps=12 format=3 uid="uid://dkyvt6roxwdst"]
+
+[ext_resource type="Texture2D" uid="uid://crtofrflsn3bd" path="res://icon.png" id="1_euux5"]
+[ext_resource type="Script" path="res://Script/mob/mob.gd" id="1_xv68g"]
+[ext_resource type="Script" path="res://Script/mob/mobMachine.gd" id="3_nb4d7"]
+[ext_resource type="Script" path="res://Script/mob/idleMob.gd" id="4_pjrdf"]
+[ext_resource type="Script" path="res://Script/mob/seekMob.gd" id="5_tktex"]
+[ext_resource type="Script" path="res://Script/mob/shootMob.gd" id="6_rswxp"]
+[ext_resource type="Script" path="res://Script/mob/hurtMob.gd" id="7_08i26"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dxnnt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_euux5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_euux5")
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_euux5")
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_euux5")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j2fey"]
+size = Vector2(94, 91)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ssybf"]
+radius = 151.0
+height = 1966.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gco00"]
+size = Vector2(98, 94)
+
+[node name="mob" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_xv68g")
+
+[node name="spriteMob" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_dxnnt")
+frame_progress = 0.395118
+speed_scale = 2.5
+
+[node name="collMob" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_j2fey")
+
+[node name="sight" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="collSight" type="CollisionShape2D" parent="sight"]
+position = Vector2(0, -50)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ssybf")
+
+[node name="hurt" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 16
+
+[node name="hurtBox" type="CollisionShape2D" parent="hurt"]
+shape = SubResource("RectangleShape2D_gco00")
+
+[node name="fsm" type="Node" parent="."]
+script = ExtResource("3_nb4d7")
+
+[node name="idle" type="Node" parent="fsm"]
+script = ExtResource("4_pjrdf")
+
+[node name="seek" type="Node" parent="fsm"]
+script = ExtResource("5_tktex")
+
+[node name="shoot" type="Node" parent="fsm"]
+script = ExtResource("6_rswxp")
+
+[node name="hurt" type="Node" parent="fsm"]
+script = ExtResource("7_08i26")
+
+[node name="wait" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[node name="reload" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="walking" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="sight" to="fsm/seek" method="_on_sight_body_entered"]
+[connection signal="body_entered" from="hurt" to="fsm/hurt" method="_on_hurt_body_entered"]
+[connection signal="timeout" from="wait" to="." method="_on_wait_timeout"]
+[connection signal="timeout" from="wait" to="fsm/hurt" method="_on_wait_timeout"]
+[connection signal="timeout" from="walking" to="fsm/idle" method="_on_walking_timeout"]

@@ -7,8 +7,7 @@ class_name baseState
 
 
 func enter() -> void:
-	print("estas en: ", self.name)
-
+	pass
 func exit(next_state) -> void:
 	parent.change_to(next_state)
 	
