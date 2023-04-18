@@ -6,7 +6,6 @@ var dire: int = 0
 var direction: int = 0
 var distance: float = 0.0
 
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 # Called when the node enters the scene tree for the first time.
 
 func _ready():
@@ -16,9 +15,8 @@ func _ready():
 	distance = randf_range(20, 50)
 	
 	
-func _process_update(delta):
-	if !mob.is_on_floor():
-		mob.velocity.y += gravity * delta
+func _physics_update(delta):
+
 		
 	if dire > 0:
 		direction = 1

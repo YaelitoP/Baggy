@@ -11,8 +11,8 @@
 size = Vector2(94, 91)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ssybf"]
-radius = 188.0
-height = 1746.0
+radius = 151.0
+height = 1966.0
 
 [node name="mob" type="CharacterBody2D"]
 collision_layer = 4
@@ -51,7 +51,7 @@ wait_time = 0.8
 one_shot = true
 
 [node name="reload" type="Timer" parent="."]
-wait_time = 0.15
+wait_time = 0.3
 one_shot = true
 
 [node name="walking" type="Timer" parent="."]

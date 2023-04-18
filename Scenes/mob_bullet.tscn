@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwp4fmo46hpvj"]
+
+[ext_resource type="Script" path="res://Script/mob_bullet.gd" id="1_byne1"]
+[ext_resource type="Texture2D" uid="uid://4x4fh2h1u7ij" path="res://icon.svg" id="1_xqbps"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r6i6m"]
+radius = 6.06716
+height = 21.9983
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4lyny"]
+radius = 6.0
+height = 22.0
+
+[node name="mobBullet" type="RigidBody2D"]
+modulate = Color(1, 0.203922, 0.00784314, 1)
+collision_layer = 8
+continuous_cd = 1
+script = ExtResource("1_byne1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_r6i6m")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(7.45058e-09, 2.38419e-07)
+rotation = 1.5708
+scale = Vector2(0.0766328, 0.146996)
+texture = ExtResource("1_xqbps")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_4lyny")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

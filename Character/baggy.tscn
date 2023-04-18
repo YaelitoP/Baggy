@@ -12,7 +12,7 @@
 size = Vector2(133, 130)
 
 [node name="baggy" type="CharacterBody2D"]
-collision_mask = 2
+collision_mask = 10
 script = ExtResource("1_q05bf")
 
 [node name="coll_baggy" type="CollisionShape2D" parent="."]
