@@ -11,7 +11,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_update(delta):
+func _physics_update(_delta):
 	for i in mob.sight.get_overlapping_bodies():
 		if i.name == "baggy":
 			target = i
@@ -22,6 +22,6 @@ func _physics_update(delta):
 			if targetDist < shootDist:
 				exit(parent.SHOOT)
 
-func _on_sight_body_entered(body):
+func _on_sight_body_entered(_body):
 	exit(parent.SEEK)
 	pass # Replace with function body.

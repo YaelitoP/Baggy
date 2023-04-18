@@ -14,9 +14,20 @@ func _ready():
 	dire = randi() % 2
 	distance = randf_range(20, 50)
 	
-	
-func _physics_update(delta):
 
+func enter() -> void:
+	mob.walkT.start()
+	pass
+	
+func exit(next_state) -> void:
+	mob.walkT.stop()
+	parent.change_to(next_state)
+	
+
+func _physics_update(_delta):
+	for i in mob.sight.get_overlapping_bodies():
+		if i.name == "baggy":
+			exit(parent.SEEK)
 		
 	if dire > 0:
 		direction = 1

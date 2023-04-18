@@ -3,11 +3,13 @@ extends StateMachine
 @onready var IDLE: = $idle
 @onready var SEEK: = $seek
 @onready var SHOOT: = $shoot
+@onready var HURT: = $hurt
 
 enum STATES {
 	IDLE,
 	SEEK,
 	SHOOT,
+	HURT,
 }
 
 func _ready():
