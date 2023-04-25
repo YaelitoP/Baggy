@@ -3,12 +3,15 @@ extends StateMachine
 @onready var IDLE: Node = $idle
 @onready var GROUNDED: Node = $grounded
 @onready var ONAIR: Node = $onAir
+@onready var HURT: Node = $hurt
+
 var direction = Vector2.ZERO
 
 enum STATES {
 		IDLE,
 		GROUNDED,
 		ONAIR,
+		HURT,
 	}
 	
 func _ready() -> void:

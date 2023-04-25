@@ -45,3 +45,8 @@ func _physics_update(_delta):
 func _on_walking_timeout():
 	distance = randf_range(20, 50)
 	dire = randi() % 2
+
+
+func _on_sight_body_exited(body):
+	exit(parent.IDLE)
+	pass # Replace with function body.

@@ -10,6 +10,7 @@ func _ready():
 	pass
 
 func _physics_update(delta):
+	baggy.side_facing()
 	if not baggy.is_on_floor():
 		baggy.velocity.y += gravity * delta
 		

@@ -12,3 +12,8 @@ func _process(_delta):
 
 func _on_area_2d_body_entered(_body):
 	queue_free()
+
+
+func _on_area_2d_area_entered(area):
+	queue_free()
+	pass # Replace with function body.
