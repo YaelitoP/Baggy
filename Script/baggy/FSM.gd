@@ -4,7 +4,7 @@ extends StateMachine
 @onready var GROUNDED: Node = $grounded
 @onready var ONAIR: Node = $onAir
 @onready var HURT: Node = $hurt
-
+@onready var PARRY: Node = $parry
 var direction = Vector2.ZERO
 
 enum STATES {
@@ -12,6 +12,7 @@ enum STATES {
 		GROUNDED,
 		ONAIR,
 		HURT,
+		PARRY,
 	}
 	
 func _ready() -> void:

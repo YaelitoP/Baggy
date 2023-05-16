@@ -6,6 +6,8 @@ extends CharacterBody2D
 @onready var reload: Node = $reload
 @onready var sprite: Node = $sprite_baggy
 @onready var hurtBox: Node = $hurtBox
+@onready var parry: Node = $parryBox
+
 @onready var dashing: bool = false
 @onready var speed: float = 500.0
 
@@ -28,8 +30,6 @@ func _ready():
 
 func _physics_process(_delta):
 	move_and_slide()
-	if Iframes.time_left == 0:
-		hurtBox.monitorable = true
 	if wait.time_left == 0:
 		dashing = false
 
@@ -54,7 +54,7 @@ func shooting():
 func invencible():
 	if Iframes.time_left == 0:
 		Iframes.start()
-		hurtBox.monitorable = false
+		hurtBox.monitoring = false
 	
 
 
@@ -79,12 +79,14 @@ func side_facing():
 		if Input.is_action_pressed("left"):
 			aiming = Vector2.LEFT
 			looking = aiming
+			parry.position.x = -15
 			sprite.play("shootL")
 		
 		
 		if Input.is_action_pressed("right"):
 			aiming = Vector2.RIGHT
 			looking = aiming
+			parry.position.x = 100
 			sprite.play("shootR")
 		
 		
@@ -119,3 +121,8 @@ func side_facing():
 			if looking == Vector2.RIGHT:
 				sprite.play("shootR")
 			
+
+
+func _on_iframes_timeout():
+	hurtBox.monitoring = true
+	pass # Replace with function body.

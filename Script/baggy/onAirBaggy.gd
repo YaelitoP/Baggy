@@ -47,7 +47,9 @@ func _physics_update(delta):
 		baggy.velocity.x = direction * baggy.DASH_SPEED/2
 	else:
 		baggy.dash()
-	
+		
+	if Input.is_action_just_pressed("parry"):
+		exit(fsm.PARRY)
 
 func exit(next_state) -> void:
 	jumpMaxed = false

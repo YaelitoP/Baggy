@@ -4,7 +4,7 @@ extends StateMachine
 @onready var SEEK: = $seek
 @onready var SHOOT: = $shoot
 @onready var HURT: = $hurt
-
+@onready var STUNT: = $stunt
 enum STATES {
 	IDLE,
 	SEEK,

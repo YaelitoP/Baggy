@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://bws2jsk3nfnng"]
+[gd_scene load_steps=89 format=3 uid="uid://bws2jsk3nfnng"]
 
 [ext_resource type="Script" path="res://Script/baggy/baggy.gd" id="1_q05bf"]
 [ext_resource type="Texture2D" uid="uid://hfhxkenjrjgv" path="res://Sprite/gabi pj/moverseVerticalIzq.png" id="2_14egs"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://Script/baggy/aiming.gd" id="7_ay0wx"]
 [ext_resource type="Texture2D" uid="uid://cwn7xlrwe78ma" path="res://Sprite/gabi pj/dispararMovimientoDerUp.png" id="7_kc5te"]
 [ext_resource type="Script" path="res://Script/baggy/hurt.gd" id="14_mocvp"]
+[ext_resource type="Script" path="res://Script/baggy/parry.gd" id="15_0tolp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1jwfw"]
 size = Vector2(115, 209)
@@ -542,6 +543,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cwvys"]
 size = Vector2(119, 214)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ivkqp"]
+size = Vector2(87, 231)
+
 [node name="baggy" type="CharacterBody2D"]
 collision_mask = 6
 script = ExtResource("1_q05bf")
@@ -552,8 +556,7 @@ shape = SubResource("RectangleShape2D_1jwfw")
 
 [node name="sprite_baggy" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5jtvo")
-animation = &"shootLD"
-frame_progress = 0.753129
+animation = &"shootL"
 
 [node name="FSM" parent="." instance=ExtResource("3_jw38x")]
 
@@ -571,6 +574,9 @@ script = ExtResource("7_ay0wx")
 
 [node name="hurt" type="Node" parent="FSM"]
 script = ExtResource("14_mocvp")
+
+[node name="parry" type="Node" parent="FSM"]
+script = ExtResource("15_0tolp")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.2, 1.2)
@@ -594,6 +600,19 @@ collision_mask = 8
 position = Vector2(1.5, 22)
 shape = SubResource("RectangleShape2D_cwvys")
 
+[node name="parryBox" type="Area2D" parent="."]
+position = Vector2(-15, 0)
+collision_layer = 256
+collision_mask = 8
+monitoring = false
+
+[node name="parryColl" type="CollisionShape2D" parent="parryBox"]
+position = Vector2(-42.5, 19.5)
+shape = SubResource("RectangleShape2D_ivkqp")
+
+[connection signal="timeout" from="Iframes" to="." method="_on_iframes_timeout"]
+[connection signal="timeout" from="Iframes" to="FSM/parry" method="_on_iframes_timeout"]
 [connection signal="body_entered" from="hurtBox" to="FSM/hurt" method="_on_hurt_box_body_entered"]
+[connection signal="body_entered" from="parryBox" to="FSM/parry" method="_on_parry_box_body_entered"]
 
 [editable path="FSM"]

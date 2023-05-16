@@ -17,13 +17,17 @@ func _ready():
 
 func _physics_update(delta: float) -> void:
 	baggy.side_facing()
+	
 	if !baggy.is_on_floor():
 		baggy.velocity.y += gravity * delta
 	
-	# Handle Jump.
+	if Input.is_action_just_pressed("parry"):
+		exit(fsm.PARRY)
+	
 	if Input.is_action_just_pressed("jump") and baggy.is_on_floor():
 		baggy.velocity.y += baggy.JUMP_VELOCITY
 		exit(fsm.ONAIR)
+		
 	var direction = Input.get_axis("left", "right")
 	movement(direction)
 	
