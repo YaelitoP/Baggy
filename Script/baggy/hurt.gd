@@ -17,3 +17,6 @@ func _physics_update(delta):
 func _on_hurt_box_body_entered(body):
 	exit(fsm.HURT)
 	pass # Replace with function body.
+
+
+# and parent.state != parent.PARRY:

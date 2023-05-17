@@ -13,12 +13,16 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var sight: = $sight
 @onready var hurt: = $hurt
 @onready var sprite: = $spriteMob
+
 @onready var bullet_path: Object = preload("res://Scenes/mob_bullet.tscn")
 @onready var mobBullet: Node
+
 @onready var frames: bool = false
 @onready var stun: bool = false
 
 func _physics_process(delta):
+	if stun == true:
+		print("paaaaa")
 	move_and_slide()
 	
 	

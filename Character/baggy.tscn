@@ -592,7 +592,7 @@ one_shot = true
 [node name="Iframes" type="Timer" parent="."]
 one_shot = true
 
-[node name="hurtBox" type="Area2D" parent="."]
+[node name="hurtBox" type="Area2D" parent="." groups=["hurt"]]
 collision_layer = 128
 collision_mask = 8
 
@@ -600,11 +600,10 @@ collision_mask = 8
 position = Vector2(1.5, 22)
 shape = SubResource("RectangleShape2D_cwvys")
 
-[node name="parryBox" type="Area2D" parent="."]
+[node name="parryBox" type="Area2D" parent="." groups=["parry"]]
 position = Vector2(-15, 0)
 collision_layer = 256
 collision_mask = 8
-monitoring = false
 
 [node name="parryColl" type="CollisionShape2D" parent="parryBox"]
 position = Vector2(-42.5, 19.5)

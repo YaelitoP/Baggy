@@ -8,7 +8,11 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _ready():
 	pass # Replace with function body.
 
-
+func enter():
+	baggy.parry.set_modulate(Color.CRIMSON)
+func exit(next_state):
+	baggy.parry.set_modulate(Color.WHITE)
+	parent.change_to(next_state)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_update(delta):
 	if baggy.Iframes.time_left == 0:

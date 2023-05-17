@@ -79,14 +79,14 @@ func side_facing():
 		if Input.is_action_pressed("left"):
 			aiming = Vector2.LEFT
 			looking = aiming
-			parry.position.x = -15
+			parry.position.x = -35
 			sprite.play("shootL")
 		
 		
 		if Input.is_action_pressed("right"):
 			aiming = Vector2.RIGHT
 			looking = aiming
-			parry.position.x = 100
+			parry.position.x = 120
 			sprite.play("shootR")
 		
 		

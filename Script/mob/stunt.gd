@@ -7,8 +7,8 @@ func _ready():
 	pass # Replace with function body.
 
 func _process(delta):
-	if mob.stunt == true:
-		exit(parent.STUNT)
+	if mob.stun == true:
+		exit(parent.STUN)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func _physics_update(_delta):

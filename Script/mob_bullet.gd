@@ -12,12 +12,13 @@ func _process(_delta):
 	pass
 
 func _on_area_2d_body_entered(body):
-	
 	queue_free()
 
 
 func _on_area_2d_area_entered(area):
-	if area.name == "parryBox":
-		pass
-	queue_free()
-	pass # Replace with function body.
+	if area.is_in_group("parry"):
+		parent.stun = true
+		print("si pa entre en parry")
+	else:
+		queue_free()
+	

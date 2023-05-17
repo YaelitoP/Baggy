@@ -95,7 +95,7 @@ script = ExtResource("6_rswxp")
 [node name="hurt" type="Node" parent="fsm"]
 script = ExtResource("7_08i26")
 
-[node name="stunt" type="Node" parent="fsm"]
+[node name="stun" type="Node" parent="fsm"]
 script = ExtResource("8_ynk40")
 
 [node name="wait" type="Timer" parent="."]
