@@ -30,7 +30,7 @@ texture = ExtResource("1_xqbps")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 130
+collision_mask = 386
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 rotation = 1.5708

@@ -16,13 +16,13 @@ func _physics_update(_delta):
 
 
 func _on_hurt_body_entered(_body):
-	if parent.state != parent.STUNT:
+	if parent.state != parent.STUN:
 		exit(parent.HURT)
 	
 
 
 func _on_wait_timeout():
-	if parent.state != parent.STUNT:
+	if parent.state != parent.STUN:
 		mob.sprite.play("default")
 		exit(parent.IDLE)
 		

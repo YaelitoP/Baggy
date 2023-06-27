@@ -544,7 +544,7 @@ animations = [{
 size = Vector2(119, 214)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ivkqp"]
-size = Vector2(87, 231)
+size = Vector2(120, 230)
 
 [node name="baggy" type="CharacterBody2D"]
 collision_mask = 6
@@ -579,7 +579,6 @@ script = ExtResource("14_mocvp")
 script = ExtResource("15_0tolp")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(1.2, 1.2)
 
 [node name="wait" type="Timer" parent="."]
 wait_time = 0.4

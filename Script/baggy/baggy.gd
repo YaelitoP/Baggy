@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-
 @onready var fsm: Object = $FSM
 @onready var wait: Node = $wait
 @onready var reload: Node = $reload

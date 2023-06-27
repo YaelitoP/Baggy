@@ -10,6 +10,7 @@ func _ready():
 
 func enter():
 	baggy.parry.set_modulate(Color.CRIMSON)
+	
 func exit(next_state):
 	baggy.parry.set_modulate(Color.WHITE)
 	parent.change_to(next_state)

@@ -13,7 +13,7 @@ func _process(delta):
 
 func _physics_update(_delta):
 	mob.wait.set_wait_time(2.0)
-	mob.vulnerable()
+	mob.wait.start()
 	mob.velocity.x = 0
 	mob.sprite.play("hurt")
 	
@@ -21,7 +21,8 @@ func _physics_update(_delta):
 
 
 func _on_wait_timeout():
+	exit(parent.IDLE)
 	mob.wait.set_wait_time(1.0)
 	mob.sprite.play("default")
-	exit(parent.IDLE)
+
 	
