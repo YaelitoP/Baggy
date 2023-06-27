@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dkyvt6roxwdst"]
+[gd_scene load_steps=13 format=3 uid="uid://dkyvt6roxwdst"]
 
 [ext_resource type="Texture2D" uid="uid://crtofrflsn3bd" path="res://icon.png" id="1_euux5"]
 [ext_resource type="Script" path="res://Script/mob/mob.gd" id="1_xv68g"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Script/mob/seekMob.gd" id="5_tktex"]
 [ext_resource type="Script" path="res://Script/mob/shootMob.gd" id="6_rswxp"]
 [ext_resource type="Script" path="res://Script/mob/hurtMob.gd" id="7_08i26"]
+[ext_resource type="Script" path="res://Script/mob/stunt.gd" id="8_ynk40"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dxnnt"]
 animations = [{
@@ -50,6 +51,7 @@ height = 1966.0
 size = Vector2(98, 94)
 
 [node name="mob" type="CharacterBody2D"]
+scale = Vector2(1, 2)
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_xv68g")
@@ -93,6 +95,9 @@ script = ExtResource("6_rswxp")
 [node name="hurt" type="Node" parent="fsm"]
 script = ExtResource("7_08i26")
 
+[node name="stun" type="Node" parent="fsm"]
+script = ExtResource("8_ynk40")
+
 [node name="wait" type="Timer" parent="."]
 process_callback = 0
 one_shot = true
@@ -106,6 +111,7 @@ one_shot = true
 autostart = true
 
 [connection signal="body_entered" from="sight" to="fsm/seek" method="_on_sight_body_entered"]
+[connection signal="body_exited" from="sight" to="fsm/idle" method="_on_sight_body_exited"]
 [connection signal="body_entered" from="hurt" to="fsm/hurt" method="_on_hurt_body_entered"]
 [connection signal="timeout" from="wait" to="." method="_on_wait_timeout"]
 [connection signal="timeout" from="wait" to="fsm/hurt" method="_on_wait_timeout"]

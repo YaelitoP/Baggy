@@ -13,10 +13,12 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var sight: = $sight
 @onready var hurt: = $hurt
 @onready var sprite: = $spriteMob
+
 @onready var bullet_path: Object = preload("res://Scenes/mob_bullet.tscn")
 @onready var mobBullet: Node
-@onready var frames: bool = false
 
+@onready var frames: bool = false
+@onready var stun: bool = false
 
 func _physics_process(delta):
 	move_and_slide()
@@ -30,6 +32,7 @@ func shoot(target):
 	if reload.time_left == 0:
 		mobBullet = bullet_path.instantiate()
 		add_child(mobBullet)
+		mobBullet.parent = self
 		mobBullet.apply_central_impulse(targetDir * mobBullet.speed)
 		reload.start()
 
@@ -41,7 +44,6 @@ func Iframes():
 		wait.start()
 		frames = false
 	
-
 
 func _on_wait_timeout():
 	hurt.monitorable = true
