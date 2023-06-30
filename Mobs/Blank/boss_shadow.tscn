@@ -1,121 +1,13 @@
-[gd_scene load_steps=18 format=3 uid="uid://c0vls3nykw4pg"]
+[gd_scene load_steps=23 format=3 uid="uid://c0vls3nykw4pg"]
 
-[ext_resource type="Script" path="res://Script/boss1/boss_shadow.gd" id="1_lqwrv"]
 [ext_resource type="SpriteFrames" uid="uid://y56ctx8byctt" path="res://Mobs/Blank/boss_shadow.tres" id="1_mcovi"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_xrml6"]
-radius = 49.0
-
-[sub_resource type="Animation" id="Animation_844fs"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("sprite_shadow:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"left"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("sprite_shadow:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("coll_shadow:shape")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [SubResource("CircleShape2D_xrml6")]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("coll_shadow:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.5708]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("coll_shadow:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(22, -12.5)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("coll_shadow:shape:radius")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [49.0]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("coll_shadow:disabled")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("coll_shadow:shape:height")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [534.0]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("AnimationPlayer:speed_scale")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.5]
-}
+[ext_resource type="Script" path="res://Mobs/Blank/Scripts/boss_shadow.gd" id="1_mn7hu"]
+[ext_resource type="Script" path="res://Mobs/Blank/Scripts/shadowMachine.gd" id="3_lnfbd"]
+[ext_resource type="Script" path="res://Mobs/Blank/Scripts/idle.gd" id="4_7dsno"]
+[ext_resource type="Script" path="res://Mobs/Blank/Scripts/seek.gd" id="5_wtkhp"]
+[ext_resource type="Script" path="res://Mobs/Blank/Scripts/drop.gd" id="6_6uggj"]
+[ext_resource type="Script" path="res://Mobs/Blank/Scripts/strike.gd" id="7_t37ds"]
+[ext_resource type="Script" path="res://Mobs/Blank/Scripts/ice.gd" id="8_nlec2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yutup"]
 radius = 95.0
@@ -214,6 +106,9 @@ tracks/6/keys = {
 "update": 1,
 "values": [false, true]
 }
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xrml6"]
+radius = 66.5
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n6a61"]
 radius = 95.0
@@ -582,7 +477,6 @@ tracks/6/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p05ux"]
 _data = {
-"RESET": SubResource("Animation_844fs"),
 "drop": SubResource("Animation_44unm"),
 "lightning": SubResource("Animation_s5wa1"),
 "moveLeft": SubResource("Animation_22abo"),
@@ -592,18 +486,16 @@ _data = {
 
 [node name="bossShadow" type="CharacterBody2D"]
 position = Vector2(888, 405)
-script = ExtResource("1_lqwrv")
+script = ExtResource("1_mn7hu")
 
 [node name="coll_shadow" type="CollisionShape2D" parent="."]
-position = Vector2(22, -12.5)
-rotation = 1.5708
-shape = SubResource("CircleShape2D_xrml6")
-disabled = true
+position = Vector2(4, -163)
+shape = SubResource("CircleShape2D_yutup")
 
 [node name="sprite_shadow" type="AnimatedSprite2D" parent="."]
 position = Vector2(13, -12)
 sprite_frames = ExtResource("1_mcovi")
-animation = &"left"
+animation = &"cae"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "spawn"
@@ -611,3 +503,21 @@ speed_scale = 0.5
 libraries = {
 "": SubResource("AnimationLibrary_p05ux")
 }
+
+[node name="fsm" type="Node" parent="."]
+script = ExtResource("3_lnfbd")
+
+[node name="idle" type="Node" parent="fsm"]
+script = ExtResource("4_7dsno")
+
+[node name="seek" type="Node" parent="fsm"]
+script = ExtResource("5_wtkhp")
+
+[node name="drop" type="Node" parent="fsm"]
+script = ExtResource("6_6uggj")
+
+[node name="strike" type="Node" parent="fsm"]
+script = ExtResource("7_t37ds")
+
+[node name="ice" type="Node" parent="fsm"]
+script = ExtResource("8_nlec2")
