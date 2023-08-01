@@ -12,7 +12,7 @@ func _process(delta):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func _physics_update(_delta):
-	mob.wait.set_wait_time(2.0)
+	mob.wait.set_wait_time(1.0)
 	mob.wait.start()
 	mob.velocity.x = 0
 	mob.sprite.play("hurt")
@@ -21,8 +21,10 @@ func _physics_update(_delta):
 
 
 func _on_wait_timeout():
+	mob.stun = false
+	mob.wait.set_wait_time(0.6)
 	exit(parent.IDLE)
-	mob.wait.set_wait_time(1.0)
+
 	mob.sprite.play("default")
 
 	

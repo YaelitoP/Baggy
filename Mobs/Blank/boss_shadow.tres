@@ -680,7 +680,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_3rmim")
 }],
 "loop": false,
-"name": &"cae",
+"name": &"drop",
 "speed": 8.0
 }, {
 "frames": [{
@@ -775,7 +775,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_p7o6x")
 }],
-"loop": true,
+"loop": false,
 "name": &"spawn",
 "speed": 5.0
 }]

@@ -37,12 +37,9 @@ func shoot(target):
 		reload.start()
 
 func Iframes():
-	if !frames:
-		frames = true
-	if frames and wait.time_left == 0:
+	if wait.time_left == 0:
 		hurt.monitorable = false
 		wait.start()
-		frames = false
 	
 
 func _on_wait_timeout():

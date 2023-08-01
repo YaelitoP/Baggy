@@ -51,10 +51,10 @@ func shooting():
 
 
 func invencible():
-	if Iframes.time_left == 0:
-		Iframes.start()
+	if Iframes.time_left != 0:
 		hurtBox.monitoring = false
-	
+	else:
+		hurtBox.monitoring = true
 
 
 
