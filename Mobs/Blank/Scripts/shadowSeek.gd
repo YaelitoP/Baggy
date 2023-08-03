@@ -30,10 +30,10 @@ func _physics_update(_delta):
 			if parent.ray.is_colliding():
 				parent.velocity.y = 0
 				parent.velocity.x = targetPos.x * parent.SPEED/2
-				if targetDist < shootDist:
-					parent.velocity.x = 0
-					fsm.chooseAtk()
-					exit(fsm.next_state)
+			if targetDist < shootDist and parent.aimed.is_colliding():
+				parent.velocity.x = 0
+				fsm.chooseAtk()
+				exit(fsm.next_state)
 					
 			elif targetDist > shootDist:
 				parent.velocity.y = targetPos.y * parent.SPEED
