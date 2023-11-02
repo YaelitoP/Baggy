@@ -14,4 +14,4 @@ func _process(delta):
 
 func _physics_update(_delta):
 	parent.anim.play("strike")
-	
+	parent.velocity.x = parent.velocity.x * parent.SPEED/2

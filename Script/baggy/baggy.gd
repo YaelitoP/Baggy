@@ -1,25 +1,29 @@
 extends CharacterBody2D
 
 @onready var fsm: Object = $FSM
+@onready var body: Object = $coll_baggy
 @onready var wait: Node = $wait
 @onready var reload: Node = $reload
 @onready var sprite: Node = $sprite_baggy
 @onready var hurtBox: Node = $hurtBox
 @onready var parry: Node = $parryBox
+@onready var Iframes: Node = $Iframes
 
 @onready var dashing: bool = false
+
 @onready var speed: float = 500.0
 
 @onready var bullet_path: Object = preload("res://Scenes/bullet.tscn")
 @onready var bullet: Node
-@onready var Iframes: Node = $Iframes
+
+
 var aiming: Vector2 = Vector2.RIGHT
 var looking: Vector2
 
 
 const JUMP_VELOCITY: float = -500.0
 const JUMP_MAX: float = -1800.0
-const DASH_SPEED: float = 1400.0
+const DASH_SPEED: float = 1000.0
 const SHOOT_SPEED: float = 200.0
 
 
@@ -53,6 +57,7 @@ func shooting():
 func invencible():
 	if Iframes.time_left != 0:
 		hurtBox.monitoring = false
+		
 	else:
 		hurtBox.monitoring = true
 

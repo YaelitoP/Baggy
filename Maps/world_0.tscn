@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://5tp0d5cptkp1"]
 
 [ext_resource type="Texture2D" uid="uid://4x4fh2h1u7ij" path="res://icon.svg" id="2_yx3ne"]
-[ext_resource type="PackedScene" uid="uid://dkyvt6roxwdst" path="res://Mobs/mob.tscn" id="3_3kmun"]
+[ext_resource type="PackedScene" uid="uid://dkyvt6roxwdst" path="res://Mobs/testMob/mob.tscn" id="3_3kmun"]
 [ext_resource type="PackedScene" uid="uid://bws2jsk3nfnng" path="res://Character/baggy.tscn" id="3_rk4ae"]
 [ext_resource type="PackedScene" uid="uid://c0vls3nykw4pg" path="res://Mobs/Blank/boss_shadow.tscn" id="4_cdphn"]
 

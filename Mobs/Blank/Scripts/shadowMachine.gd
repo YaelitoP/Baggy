@@ -1,7 +1,7 @@
 extends StateMachine
 
 
-@onready var IDLE: = $idle
+@onready var SHOOT: = $shooted
 @onready var SEEK: = $seek
 
 @onready var DROP: = $drop
@@ -12,7 +12,7 @@ extends StateMachine
 @onready var next_state: Object
 
 enum STATES {
-	IDLE,
+	SHOOT,
 	SEEK,
 	DROP,
 	STRIKE,

@@ -30,16 +30,17 @@ func _physics_update(_delta):
 			if parent.ray.is_colliding():
 				parent.velocity.y = 0
 				parent.velocity.x = targetPos.x * parent.SPEED/2
-			if targetDist < shootDist and parent.aimed.is_colliding():
-				parent.velocity.x = 0
-				fsm.chooseAtk()
-				exit(fsm.next_state)
+				
+				if targetDist < shootDist and parent.aimed.is_colliding():
+					parent.velocity.x = 0
+					fsm.chooseAtk()
+					exit(fsm.next_state)
 					
 			elif targetDist > shootDist:
 				parent.velocity.y = targetPos.y * parent.SPEED
 				
 
 func _on_sight_body_entered(_body):
-	if fsm.state != fsm.DROP or fsm.state != fsm.ICE or fsm.state != fsm.STRIKE:
+	if fsm.state != fsm.DROP and fsm.state != fsm.ICE and fsm.state != fsm.STRIKE and fsm.state != fsm.SHOOT:
 		exit(fsm.SEEK)
 	pass

@@ -14,5 +14,5 @@ func _process(delta):
 
 func _physics_update(_delta):
 	if !parent.anim.get_current_animation() == "ice":
-		parent.anim.play("drop")
+		parent.anim.play("dropIce")
 	parent.anim.queue("ice")

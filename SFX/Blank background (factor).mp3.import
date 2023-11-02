@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bc00owllsh3qw"
+path="res://.godot/imported/Blank background (factor).mp3-2b65beb2dc43ac868b4285b069f45690.mp3str"
+
+[deps]
+
+source_file="res://SFX/Blank background (factor).mp3"
+dest_files=["res://.godot/imported/Blank background (factor).mp3-2b65beb2dc43ac868b4285b069f45690.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=5.0
+bpm=0.0
+beat_count=0
+bar_beats=4
