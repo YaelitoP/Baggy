@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cng8krffp1u1k"
-path="res://.godot/imported/dispararMovimientoIzq.png-7faf7c789f361a2e31fa078e3792b2f6.ctex"
+uid="uid://bv247feh6fppd"
+path="res://.godot/imported/dash.png-578e8180167b32ad2df47ec48d1ad35e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprite/gabi pj/dispararMovimientoIzq.png"
-dest_files=["res://.godot/imported/dispararMovimientoIzq.png-7faf7c789f361a2e31fa078e3792b2f6.ctex"]
+source_file="res://Sprite/gabi pj/dash.png"
+dest_files=["res://.godot/imported/dash.png-578e8180167b32ad2df47ec48d1ad35e.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var aimed: Object = $atkRay
 @onready var fsm: Object = $fsm
 @onready var hitbox: Node = $coll_shadow
+@onready var detect: Node = $detectCollide
 signal respawn
 
 const SPEED = 850.0
@@ -22,11 +23,10 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func throw():
-	print("enter")
 	fsm.call_deferred("change_to", fsm.SHOOT)
 	
 
 
 func _on_detect_collide_body_entered(body):
-	hitbox.set_deferred("disabled", true)
-
+	detect.set_deferred("monitoring", false)
+	detect.set_deferred("monitorable", false)

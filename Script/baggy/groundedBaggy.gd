@@ -16,7 +16,7 @@ func _ready():
 
 
 func _physics_update(delta: float) -> void:
-	baggy.side_facing()
+	baggy.anim()
 	
 	if !baggy.is_on_floor():
 		baggy.velocity.y += gravity * delta
@@ -39,6 +39,7 @@ func _physics_update(delta: float) -> void:
 
 func movement(direction):
 	if direction and Input.is_action_just_pressed("dash"):
+			baggy.sprite.play("dash")
 			baggy.wait.start()
 			baggy.dash()
 		

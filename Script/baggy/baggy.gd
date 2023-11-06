@@ -57,18 +57,28 @@ func shooting():
 func invencible():
 	if Iframes.time_left != 0:
 		hurtBox.monitoring = false
-		
+		print("se")
+		set_collision_layer_value(1, false)
 	else:
 		hurtBox.monitoring = true
+		set_collision_layer_value(1, true)
 
 
 
-func side_facing():
+func anim():
 	
 	var RIGHT: = Input.is_action_pressed("right")
 	var LEFT: = Input.is_action_pressed("left")
 	var UP: = Input.is_action_pressed("up")
 	var DOWN: = Input.is_action_pressed("crounch")
+	var JUMP: = Input.is_action_just_pressed("jump")
+	var DASH: = Input.is_action_just_pressed("dash")
+	
+	if JUMP:
+		sprite.play("jump")
+	elif DASH:
+		sprite.play("dash")
+	
 	
 	if (RIGHT or LEFT) and (UP or DOWN):
 		aiming = Input.get_vector("left", "right", "up", "crounch") 
