@@ -10,7 +10,7 @@ func _ready():
 	pass
 
 func _physics_update(delta):
-	baggy.side_facing()
+	baggy.anim()
 	if not baggy.is_on_floor():
 		baggy.velocity.y += gravity * delta
 	if Input.is_action_pressed("left") or Input.is_action_pressed("right"):

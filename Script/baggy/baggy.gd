@@ -23,7 +23,7 @@ var looking: Vector2
 
 const JUMP_VELOCITY: float = -500.0
 const JUMP_MAX: float = -1800.0
-const DASH_SPEED: float = 1000.0
+const DASH_SPEED: float = 800.0
 const SHOOT_SPEED: float = 200.0
 
 
@@ -71,70 +71,88 @@ func anim():
 	var LEFT: = Input.is_action_pressed("left")
 	var UP: = Input.is_action_pressed("up")
 	var DOWN: = Input.is_action_pressed("crounch")
-	var JUMP: = Input.is_action_just_pressed("jump")
-	var DASH: = Input.is_action_just_pressed("dash")
-	
-	if JUMP:
-		sprite.play("jump")
-	elif DASH:
-		sprite.play("dash")
+	var JUMP: = Input.is_action_pressed("jump")
+	var DASH: = Input.is_action_pressed("dash")
 	
 	
-	if (RIGHT or LEFT) and (UP or DOWN):
-		aiming = Input.get_vector("left", "right", "up", "crounch") 
 		
-		if aiming >= Vector2(-1, -1) and aiming < Vector2(-0.50, -0.50):
-			sprite.play("shootLD")
-			looking = Vector2.LEFT
-		if aiming <= Vector2(1, -1) and aiming > Vector2(0.50, -0.50):
-			sprite.play("shootRD")
-			looking = Vector2.RIGHT
+	if self.is_on_floor() and !dashing:
+		
+		if (RIGHT or LEFT) and (UP or DOWN):
+			aiming = Input.get_vector("left", "right", "up", "crounch") 
+			
+			if aiming >= Vector2(-1, -1) and aiming < Vector2(-0.50, -0.50):
+				sprite.play("shootLD")
+				looking = Vector2.LEFT
+			if aiming <= Vector2(1, -1) and aiming > Vector2(0.50, -0.50):
+				sprite.play("shootRD")
+				looking = Vector2.RIGHT
+		else:
+			if LEFT:
+				aiming = Vector2.LEFT
+				looking = aiming
+				parry.position.x = -35
+				sprite.play("shootL")
+			
+			if RIGHT:
+				aiming = Vector2.RIGHT
+				looking = aiming
+				parry.position.x = 120
+				sprite.play("shootR")
+			
+			if UP:
+				aiming = Vector2.UP
+				
+				if looking == Vector2.LEFT:
+					sprite.play("shootLU")
+					
+				if looking == Vector2.RIGHT:
+					sprite.play("shootRU")
+				
+				
+			elif Input.is_action_just_released("up"):
+				aiming = looking
+				
+				if looking == Vector2.LEFT:
+					sprite.play("shootL")
+					
+				if looking == Vector2.RIGHT:
+					sprite.play("shootR")
+				
+			if DOWN:
+				aiming = Vector2.DOWN
+				
+			elif Input.is_action_just_released("crounch"):
+				aiming = looking
+				
+				if looking == Vector2.LEFT:
+					sprite.play("shootL")
+					
+				if looking == Vector2.RIGHT:
+					sprite.play("shootR")
 	else:
-		if Input.is_action_pressed("left"):
-			aiming = Vector2.LEFT
-			looking = aiming
-			parry.position.x = -35
-			sprite.play("shootL")
 		
-		
-		if Input.is_action_pressed("right"):
-			aiming = Vector2.RIGHT
-			looking = aiming
-			parry.position.x = 120
-			sprite.play("shootR")
-		
-		
-		if UP:
-			aiming = Vector2.UP
-			
+		if JUMP:
 			if looking == Vector2.LEFT:
-				sprite.play("shootLU")
-				
+				sprite.play("jumpL")
+		
 			if looking == Vector2.RIGHT:
-				sprite.play("shootRU")
-			
-			
-		elif Input.is_action_just_released("up"):
-			aiming = looking
-			
+				sprite.play("jumpR")
+		
+		if DASH and !self.is_on_floor():
 			if looking == Vector2.LEFT:
-				sprite.play("shootL")
-				
+				sprite.play("airDashL")
+			
 			if looking == Vector2.RIGHT:
-				sprite.play("shootR")
-			
-		if DOWN:
-			aiming = Vector2.DOWN
-			
-		elif Input.is_action_just_released("crounch"):
-			aiming = looking
-			
+				sprite.play("airDashR")
+		
+		elif DASH:
 			if looking == Vector2.LEFT:
-				sprite.play("shootL")
-				
-			if looking == Vector2.RIGHT:
-				sprite.play("shootR")
+				sprite.play("dashL")
 			
+			if looking == Vector2.RIGHT:
+				sprite.play("dashR")
+		
 
 
 func _on_iframes_timeout():

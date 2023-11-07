@@ -14,7 +14,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_update(delta):
-	baggy.side_facing()
+	baggy.anim()
 	if !baggy.is_on_floor():
 		baggy.velocity.y += gravity * delta
 	else:
