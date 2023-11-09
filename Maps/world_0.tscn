@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://5tp0d5cptkp1"]
+[gd_scene load_steps=8 format=3 uid="uid://5tp0d5cptkp1"]
 
 [ext_resource type="Texture2D" uid="uid://4x4fh2h1u7ij" path="res://icon.svg" id="2_yx3ne"]
 [ext_resource type="PackedScene" uid="uid://dkyvt6roxwdst" path="res://Mobs/testMob/mob.tscn" id="3_3kmun"]
@@ -264,9 +264,12 @@ texture = ExtResource("2_yx3ne")
 7:7/0/physics_layer_0/angular_velocity = 0.0
 7:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 7, 2, 4.5, 7, -2, 8, -8, -8, -8)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ccjt7"]
+
 [sub_resource type="TileSet" id="TileSet_hik8b"]
 physics_layer_0/collision_layer = 2
 sources/1 = SubResource("TileSetAtlasSource_pecgk")
+sources/2 = SubResource("TileSetAtlasSource_ccjt7")
 
 [node name="world0" type="Node2D"]
 

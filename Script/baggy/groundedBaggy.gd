@@ -29,12 +29,14 @@ func _physics_update(delta: float) -> void:
 		exit(fsm.ONAIR)
 		
 	var direction = Input.get_axis("left", "right")
-	movement(direction)
+	
+	if !baggy.dashing:
+		movement(direction)
 	
 	if Input.is_action_pressed("shoot"):
 		baggy.shooting()
 	
-		
+	
 
 
 func movement(direction):
@@ -44,11 +46,14 @@ func movement(direction):
 		
 	
 	if baggy.dashing:
+		baggy.velocity.x = 0
+		await get_tree().create_timer(0.15).timeout
 		baggy.velocity.x = direction * baggy.DASH_SPEED
-		
 	elif direction:
 		baggy.velocity.x = direction * baggy.speed
-		
+	elif baggy.sprite.get_frame() >= 10 and (baggy.sprite.get_animation() == "dashL" or baggy.sprite.get_animation() == "dashR"):
+			print("perra")
+			baggy.velocity.x = move_toward(baggy.velocity.x, 0, baggy.DASH_SPEED)
 	else:
 		baggy.velocity.x = move_toward(baggy.velocity.x, 0, baggy.speed)
 	

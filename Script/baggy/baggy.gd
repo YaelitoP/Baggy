@@ -23,7 +23,7 @@ var looking: Vector2
 
 const JUMP_VELOCITY: float = -500.0
 const JUMP_MAX: float = -1800.0
-const DASH_SPEED: float = 800.0
+const DASH_SPEED: float = 900.0
 const SHOOT_SPEED: float = 200.0
 
 
@@ -45,7 +45,7 @@ func dash():
 
 func shooting():
 	
-	if reload.time_left == 0:
+	if reload.time_left == 0 and is_on_floor():
 		bullet = bullet_path.instantiate()
 		add_child(bullet)
 		bullet.apply_central_impulse(aiming * bullet.speed)
@@ -78,13 +78,13 @@ func anim():
 		
 	if self.is_on_floor() and !dashing:
 		
-		if (RIGHT or LEFT) and (UP or DOWN):
+		if (RIGHT or LEFT) and UP:
 			aiming = Input.get_vector("left", "right", "up", "crounch") 
-			
-			if aiming >= Vector2(-1, -1) and aiming < Vector2(-0.50, -0.50):
+			print(aiming)
+			if aiming.y <= -0.7 and aiming.x <= -0.7:
 				sprite.play("shootLD")
 				looking = Vector2.LEFT
-			if aiming <= Vector2(1, -1) and aiming > Vector2(0.50, -0.50):
+			if aiming.y <= 0.7 and aiming.x >= 0.7:
 				sprite.play("shootRD")
 				looking = Vector2.RIGHT
 		else:
@@ -138,7 +138,14 @@ func anim():
 		
 			if looking == Vector2.RIGHT:
 				sprite.play("jumpR")
-		
+			
+			if JUMP and !self.is_on_floor():
+				if looking == Vector2.LEFT:
+					sprite.play("jumpL")
+				
+				if looking == Vector2.RIGHT:
+					sprite.play("jumpR")
+					
 		if DASH and !self.is_on_floor():
 			if looking == Vector2.LEFT:
 				sprite.play("airDashL")
@@ -153,7 +160,7 @@ func anim():
 			if looking == Vector2.RIGHT:
 				sprite.play("dashR")
 		
-
+	
 
 func _on_iframes_timeout():
 	hurtBox.monitoring = true

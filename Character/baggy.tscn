@@ -728,16 +728,16 @@ animations = [{
 "speed": 12.0
 }, {
 "frames": [{
-"duration": 0.7,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_reudc")
 }, {
-"duration": 0.7,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_45wb5")
 }, {
-"duration": 0.7,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_wyqyt")
 }, {
-"duration": 0.7,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_o3ok1")
 }, {
 "duration": 1.0,
@@ -781,7 +781,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"dashL",
-"speed": 15.0
+"speed": 16.0
 }, {
 "frames": [{
 "duration": 0.7,
@@ -837,7 +837,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"dashR",
-"speed": 15.0
+"speed": 16.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1215,11 +1215,13 @@ script = ExtResource("14_mocvp")
 script = ExtResource("15_0tolp")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
 position = Vector2(0, -256)
-offset = Vector2(0, -270)
-zoom = Vector2(0.7, 0.7)
+offset = Vector2(0, -370)
+enabled = false
 
 [node name="wait" type="Timer" parent="."]
+wait_time = 0.8
 one_shot = true
 
 [node name="reload" type="Timer" parent="."]
