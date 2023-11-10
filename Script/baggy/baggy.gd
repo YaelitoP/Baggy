@@ -8,22 +8,26 @@ extends CharacterBody2D
 @onready var hurtBox: Node = $hurtBox
 @onready var parry: Node = $parryBox
 @onready var Iframes: Node = $Iframes
+@onready var airTime: Node = $airTime
 
 @onready var dashing: bool = false
-
+@onready var jumping: bool = false
 @onready var speed: float = 500.0
 
 @onready var bullet_path: Object = preload("res://Scenes/bullet.tscn")
+
 @onready var bullet: Node
 
 
 var aiming: Vector2 = Vector2.RIGHT
+
 var looking: Vector2
 
 
 const JUMP_VELOCITY: float = -500.0
 const JUMP_MAX: float = -1800.0
 const DASH_SPEED: float = 900.0
+const AIR_SPEED: float = 700.0
 const SHOOT_SPEED: float = 200.0
 
 
@@ -74,13 +78,11 @@ func anim():
 	var JUMP: = Input.is_action_pressed("jump")
 	var DASH: = Input.is_action_pressed("dash")
 	
-	
-		
-	if self.is_on_floor() and !dashing:
-		
+
+	if is_on_floor() and !dashing:
 		if (RIGHT or LEFT) and UP:
 			aiming = Input.get_vector("left", "right", "up", "crounch") 
-			print(aiming)
+			
 			if aiming.y <= -0.7 and aiming.x <= -0.7:
 				sprite.play("shootLD")
 				looking = Vector2.LEFT
@@ -135,17 +137,20 @@ func anim():
 		if JUMP:
 			if looking == Vector2.LEFT:
 				sprite.play("jumpL")
-		
+			
 			if looking == Vector2.RIGHT:
 				sprite.play("jumpR")
 			
-			if JUMP and !self.is_on_floor():
-				if looking == Vector2.LEFT:
-					sprite.play("jumpL")
-				
-				if looking == Vector2.RIGHT:
-					sprite.play("jumpR")
-					
+			
+		elif !self.is_on_floor() and !dashing and airTime.time_left == 0:
+			if looking == Vector2.LEFT:
+				sprite.play("fallL")
+			
+			if looking == Vector2.RIGHT:
+				sprite.play("fallR")
+			
+			
+		
 		if DASH and !self.is_on_floor():
 			if looking == Vector2.LEFT:
 				sprite.play("airDashL")
@@ -160,7 +165,8 @@ func anim():
 			if looking == Vector2.RIGHT:
 				sprite.play("dashR")
 		
-	
+
+
 
 func _on_iframes_timeout():
 	hurtBox.monitoring = true

@@ -7,7 +7,7 @@
 radius = 156.051
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w0d4e"]
-radius = 1655.11
+radius = 3591.07
 
 [node name="bossBody" type="StaticBody2D"]
 collision_layer = 0
@@ -32,3 +32,5 @@ position = Vector2(1, 183)
 [node name="cd" type="Timer" parent="."]
 wait_time = 2.5
 one_shot = true
+
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

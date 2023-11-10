@@ -25,6 +25,13 @@ func _physics_update(delta: float) -> void:
 		exit(fsm.PARRY)
 	
 	if Input.is_action_just_pressed("jump") and baggy.is_on_floor():
+		if baggy.looking == Vector2.LEFT:
+				baggy.sprite.play("jumpL")
+			
+		if baggy.looking == Vector2.RIGHT:
+			baggy.sprite.play("jumpR")
+		
+		baggy.airTime.start()
 		baggy.velocity.y += baggy.JUMP_VELOCITY
 		exit(fsm.ONAIR)
 		
@@ -47,13 +54,10 @@ func movement(direction):
 	
 	if baggy.dashing:
 		baggy.velocity.x = 0
-		await get_tree().create_timer(0.15).timeout
+		await get_tree().create_timer(0.10).timeout
 		baggy.velocity.x = direction * baggy.DASH_SPEED
 	elif direction:
 		baggy.velocity.x = direction * baggy.speed
-	elif baggy.sprite.get_frame() >= 10 and (baggy.sprite.get_animation() == "dashL" or baggy.sprite.get_animation() == "dashR"):
-			print("perra")
-			baggy.velocity.x = move_toward(baggy.velocity.x, 0, baggy.DASH_SPEED)
 	else:
 		baggy.velocity.x = move_toward(baggy.velocity.x, 0, baggy.speed)
 	

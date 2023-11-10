@@ -65,3 +65,10 @@ func turnHead():
 			spawn = false
 		else:
 			spawn = false
+
+
+func _on_area_2d_body_exited(body):
+	if body == shdInstance:
+		shdInstance.queue_free()
+		print("yeah")
+	pass # Replace with function body.

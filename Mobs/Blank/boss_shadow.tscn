@@ -589,7 +589,7 @@ tracks/2/keys = {
 }
 tracks/3/type = "value"
 tracks/3/imported = false
-tracks/3/enabled = true
+tracks/3/enabled = false
 tracks/3/path = NodePath("coll_shadow:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
@@ -726,12 +726,14 @@ _data = {
 radius = 96.0052
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2pwlf"]
-radius = 1333.65
+radius = 1982.0
 
 [node name="bossShadow" type="CharacterBody2D"]
 position = Vector2(888, 405)
+disable_mode = 2
 collision_layer = 8
 collision_mask = 2
+floor_stop_on_slope = false
 script = ExtResource("1_mn7hu")
 metadata/_edit_vertical_guides_ = [-60952.0, -6862.0]
 metadata/_edit_horizontal_guides_ = [-9726.0, 10971.0]
@@ -754,6 +756,7 @@ libraries = {
 }
 
 [node name="detectCollide" type="Area2D" parent="."]
+modulate = Color(0.952941, 0, 0.45098, 1)
 position = Vector2(4, -165)
 collision_layer = 4
 
@@ -761,6 +764,7 @@ collision_layer = 4
 shape = SubResource("CircleShape2D_oyewm")
 
 [node name="sight" type="Area2D" parent="."]
+modulate = Color(0.54902, 1, 0.647059, 0.32549)
 collision_layer = 0
 
 [node name="coll_sight" type="CollisionShape2D" parent="sight"]

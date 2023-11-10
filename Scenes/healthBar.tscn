@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://ch8skj8aryuos"]
+
+[ext_resource type="Texture2D" uid="uid://70ue44g3iehe" path="res://Sprite/UI/healthFrame.png" id="1_6mwtp"]
+[ext_resource type="Texture2D" uid="uid://clfmb6wq7wsy5" path="res://Sprite/UI/bar.png" id="2_ck64e"]
+
+[node name="healthBar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 2
+offset_left = 1.0
+offset_top = -2.0
+offset_right = 837.0
+offset_bottom = 214.0
+value = 100.0
+texture_under = ExtResource("1_6mwtp")
+texture_progress = ExtResource("2_ck64e")
+texture_progress_offset = Vector2(102, 124)
