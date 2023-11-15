@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c0g5riegms3m3"]
+[gd_scene load_steps=18 format=3 uid="uid://c0g5riegms3m3"]
 
 [ext_resource type="Texture2D" uid="uid://4x4fh2h1u7ij" path="res://icon.svg" id="1_lexe2"]
 [ext_resource type="Texture2D" uid="uid://dn58bf5etlnml" path="res://Sprite/tiles/tailset_bright.png" id="2_h7lkd"]
@@ -8,6 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://b0pnfce7deppv" path="res://Sprite/fondo2final.png" id="4_kl1p5"]
 [ext_resource type="Texture2D" uid="uid://bu5q6gb41h3lm" path="res://Sprite/tiles/twilight-tiles.png" id="5_rvp4o"]
 [ext_resource type="Texture2D" uid="uid://i48u1h15bnrw" path="res://Sprite/fondo 1.png" id="6_ntf12"]
+[ext_resource type="PackedScene" uid="uid://ch8skj8aryuos" path="res://Scenes/healthBar.tscn" id="8_lfkxm"]
+[ext_resource type="PackedScene" uid="uid://db6j271mc1b87" path="res://Scenes/death.tscn" id="9_jxtbp"]
+[ext_resource type="PackedScene" uid="uid://dq6384umcuo0" path="res://Scenes/pause.tscn" id="10_3aj7y"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cj70x"]
 resource_name = "bright"
@@ -1553,7 +1556,23 @@ metadata/_edit_group_ = true
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(2510, 1568)
 offset = Vector2(-30, -40)
-zoom = Vector2(0.5, 0.5)
+zoom = Vector2(0.7, 0.7)
+
+[node name="healthBar" parent="Camera2D" instance=ExtResource("8_lfkxm")]
+layout_direction = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -1300.0
+offset_top = -744.0
+offset_right = -1300.0
+offset_bottom = -744.0
+grow_vertical = 2
+size_flags_horizontal = 0
+
+[node name="death" parent="Camera2D" instance=ExtResource("9_jxtbp")]
+
+[node name="Pause" parent="Camera2D" instance=ExtResource("10_3aj7y")]
 
 [node name="Fondo1" type="Sprite2D" parent="."]
 position = Vector2(7095, 1500)

@@ -12,12 +12,16 @@ extends CharacterBody2D
 
 @onready var dashing: bool = false
 @onready var jumping: bool = false
+@onready var death: bool = false
 @onready var speed: float = 500.0
-
+@onready var life: int = 3
 @onready var bullet_path: Object = preload("res://Scenes/bullet.tscn")
 
 @onready var bullet: Node
 
+signal hurted
+signal pause
+signal dead
 
 var aiming: Vector2 = Vector2.RIGHT
 
@@ -33,10 +37,30 @@ const SHOOT_SPEED: float = 200.0
 
 func _ready():
 	looking = aiming
-	
+	for node in get_tree().get_nodes_in_group("ui"):
+		if node.has_method("update"):
+			connect("hurted", node.update)
+		if node.has_method("pause"):
+			connect("pause", node.pause)
+		if node.has_method("death"):
+			connect("dead", node.death)
+
+
 
 func _physics_process(_delta):
 	move_and_slide()
+	
+	if Input.is_action_just_pressed("pausa"):
+		get_tree().paused = true
+		emit_signal("pause")
+	
+	if life == 0:
+		death = true
+	
+	if death:
+		emit_signal("dead")
+		queue_free()
+	
 	if wait.time_left == 0:
 		dashing = false
 
@@ -74,7 +98,7 @@ func anim():
 	var RIGHT: = Input.is_action_pressed("right")
 	var LEFT: = Input.is_action_pressed("left")
 	var UP: = Input.is_action_pressed("up")
-	var DOWN: = Input.is_action_pressed("crounch")
+	var _DOWN: = Input.is_action_pressed("crounch")
 	var JUMP: = Input.is_action_pressed("jump")
 	var DASH: = Input.is_action_pressed("dash")
 	
@@ -89,7 +113,7 @@ func anim():
 			if aiming.y <= 0.7 and aiming.x >= 0.7:
 				sprite.play("shootRD")
 				looking = Vector2.RIGHT
-		else:
+		elif RIGHT or LEFT or UP:
 			if LEFT:
 				aiming = Vector2.LEFT
 				looking = aiming
@@ -120,18 +144,9 @@ func anim():
 					
 				if looking == Vector2.RIGHT:
 					sprite.play("shootR")
-				
-			if DOWN:
-				aiming = Vector2.DOWN
-				
-			elif Input.is_action_just_released("crounch"):
-				aiming = looking
-				
-				if looking == Vector2.LEFT:
-					sprite.play("shootL")
-					
-				if looking == Vector2.RIGHT:
-					sprite.play("shootR")
+		else:
+			sprite.play("idle")
+		
 	else:
 		
 		if JUMP:

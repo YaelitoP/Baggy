@@ -11,6 +11,7 @@ extends CharacterBody2D
 signal respawn
 
 const SPEED = 850.0
+const SHOT_SPEED = 15300
 const JUMP_VELOCITY = -400.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -19,7 +20,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func ready():
 	randomize()
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	
 	move_and_slide()
 	
@@ -28,6 +29,3 @@ func throw():
 	
 
 
-func _on_detect_collide_body_entered(body):
-	detect.set_deferred("monitoring", false)
-	detect.set_deferred("monitorable", false)

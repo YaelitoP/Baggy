@@ -14,7 +14,7 @@ signal throwShd
 func _ready():
 	cd.start()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	
 	turnHead()
 	

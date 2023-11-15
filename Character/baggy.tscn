@@ -1,9 +1,8 @@
-[gd_scene load_steps=186 format=3 uid="uid://bws2jsk3nfnng"]
+[gd_scene load_steps=187 format=3 uid="uid://bws2jsk3nfnng"]
 
 [ext_resource type="Script" path="res://Script/baggy/baggy.gd" id="1_q05bf"]
 [ext_resource type="Texture2D" uid="uid://bv247feh6fppd" path="res://Sprite/gabi pj/dash.png" id="2_3r47m"]
 [ext_resource type="Texture2D" uid="uid://ve0clkor0ujx" path="res://Sprite/gabi pj/dashizq.png" id="2_4noxo"]
-[ext_resource type="Texture2D" uid="uid://hfhxkenjrjgv" path="res://Sprite/gabi pj/moverseVerticalIzq.png" id="2_14egs"]
 [ext_resource type="Texture2D" uid="uid://cng8krffp1u1k" path="res://Sprite/gabi pj/dispararMovimientoIzq.png" id="2_x6rsc"]
 [ext_resource type="Texture2D" uid="uid://de5kq2prlrtk2" path="res://Sprite/gabi pj/dispararMovimientoDer.png" id="3_6q17n"]
 [ext_resource type="Texture2D" uid="uid://dsvwja0vvwoqa" path="res://Sprite/gabi pj/dispararMovimientoIzqDiag.png" id="3_ihyb8"]
@@ -13,13 +12,13 @@
 [ext_resource type="Texture2D" uid="uid://bk2gfduwkckok" path="res://Sprite/gabi pj/dispararMovimientoIzqUp.png" id="4_rcgiu"]
 [ext_resource type="Texture2D" uid="uid://b6dj2x43s2wm3" path="res://Sprite/gabi pj/saltoizq.png" id="5_ddryn"]
 [ext_resource type="Script" path="res://Script/baggy/groundedBaggy.gd" id="5_icmiy"]
+[ext_resource type="Texture2D" uid="uid://b3e2nsasvtlkm" path="res://Sprite/gabi pj/idle.png" id="6_et6q4"]
 [ext_resource type="Texture2D" uid="uid://5n4va4f5wvj6" path="res://Sprite/gabi pj/dispararMovimientoDerDieago.png" id="6_pg24s"]
 [ext_resource type="Script" path="res://Script/baggy/onAirBaggy.gd" id="6_tly3f"]
 [ext_resource type="Script" path="res://Script/baggy/aiming.gd" id="7_ay0wx"]
 [ext_resource type="Texture2D" uid="uid://cwn7xlrwe78ma" path="res://Sprite/gabi pj/dispararMovimientoDerUp.png" id="7_kc5te"]
 [ext_resource type="Script" path="res://Script/baggy/hurt.gd" id="14_mocvp"]
 [ext_resource type="Script" path="res://Script/baggy/parry.gd" id="15_0tolp"]
-[ext_resource type="PackedScene" uid="uid://ch8skj8aryuos" path="res://Scenes/healthBar.tscn" id="20_vp5sv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1jwfw"]
 size = Vector2(115, 209)
@@ -304,17 +303,25 @@ region = Rect2(2500, 0, 250, 250)
 atlas = ExtResource("4_6aafp")
 region = Rect2(2250, 0, 250, 250)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_odrgn"]
-atlas = ExtResource("2_14egs")
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ts0y"]
+atlas = ExtResource("6_et6q4")
 region = Rect2(0, 0, 250, 250)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_o3oxp"]
-atlas = ExtResource("2_14egs")
-region = Rect2(2250, 0, 250, 250)
+[sub_resource type="AtlasTexture" id="AtlasTexture_tyeor"]
+atlas = ExtResource("6_et6q4")
+region = Rect2(250, 0, 250, 250)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3d64u"]
-atlas = ExtResource("2_14egs")
-region = Rect2(2500, 0, 250, 250)
+[sub_resource type="AtlasTexture" id="AtlasTexture_v4aiv"]
+atlas = ExtResource("6_et6q4")
+region = Rect2(500, 0, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u2g7v"]
+atlas = ExtResource("6_et6q4")
+region = Rect2(750, 0, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xu3y0"]
+atlas = ExtResource("6_et6q4")
+region = Rect2(1000, 0, 250, 250)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oss4h"]
 atlas = ExtResource("5_ddryn")
@@ -912,17 +919,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_odrgn")
+"texture": SubResource("AtlasTexture_1ts0y")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_o3oxp")
+"texture": SubResource("AtlasTexture_tyeor")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3d64u")
+"texture": SubResource("AtlasTexture_v4aiv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u2g7v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xu3y0")
 }],
-"loop": false,
+"loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1235,7 +1248,7 @@ size = Vector2(119, 214)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ivkqp"]
 size = Vector2(120, 230)
 
-[node name="baggy" type="CharacterBody2D"]
+[node name="baggy" type="CharacterBody2D" groups=["player"]]
 collision_mask = 2
 script = ExtResource("1_q05bf")
 
@@ -1245,7 +1258,8 @@ shape = SubResource("RectangleShape2D_1jwfw")
 
 [node name="sprite_baggy" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5jtvo")
-animation = &"jumpR"
+animation = &"idle"
+frame_progress = 0.155962
 
 [node name="FSM" parent="." instance=ExtResource("3_jw38x")]
 
@@ -1305,8 +1319,6 @@ monitorable = false
 [node name="parryColl" type="CollisionShape2D" parent="parryBox"]
 position = Vector2(-42.5, 19.5)
 shape = SubResource("RectangleShape2D_ivkqp")
-
-[node name="Control" parent="." instance=ExtResource("20_vp5sv")]
 
 [connection signal="timeout" from="Iframes" to="." method="_on_iframes_timeout"]
 [connection signal="timeout" from="Iframes" to="FSM/parry" method="_on_iframes_timeout"]

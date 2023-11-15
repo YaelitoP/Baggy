@@ -32,7 +32,7 @@ func _physics_update(delta):
 	
 	
 
-func _on_parry_box_body_entered(body):
+func _on_parry_box_body_entered(_body):
 	print("parriado pa")
 	baggy.invencible()
 	baggy.parry.set_deferred("monitoring", false)

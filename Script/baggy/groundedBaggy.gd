@@ -5,7 +5,7 @@ extends baseState
 
 @onready var jumpMaxed: bool = false
 @onready var jumpTime: float = 0.0
-
+@onready var lock: bool = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -17,6 +17,12 @@ func _ready():
 
 func _physics_update(delta: float) -> void:
 	baggy.anim()
+	
+	if Input.is_action_pressed("lock"):
+		lock = true
+	if Input.is_action_just_released("lock"):
+		lock = false
+	
 	
 	if !baggy.is_on_floor():
 		baggy.velocity.y += gravity * delta
@@ -47,20 +53,22 @@ func _physics_update(delta: float) -> void:
 
 
 func movement(direction):
-	if direction and Input.is_action_just_pressed("dash"):
-			baggy.wait.start()
-			baggy.dash()
+	if !lock:
+		if direction and Input.is_action_just_pressed("dash"):
+				baggy.wait.start()
+				baggy.dash()
+			
 		
-	
-	if baggy.dashing:
-		baggy.velocity.x = 0
-		await get_tree().create_timer(0.10).timeout
-		baggy.velocity.x = direction * baggy.DASH_SPEED
-	elif direction:
-		baggy.velocity.x = direction * baggy.speed
+		if baggy.dashing:
+			baggy.velocity.x = 0
+			await get_tree().create_timer(0.10).timeout
+			baggy.velocity.x = direction * baggy.DASH_SPEED
+		elif direction:
+			baggy.velocity.x = direction * baggy.speed
+		else:
+			baggy.velocity.x = move_toward(baggy.velocity.x, 0, baggy.speed)
 	else:
-		baggy.velocity.x = move_toward(baggy.velocity.x, 0, baggy.speed)
-	
+		baggy.velocity.x = 0
 
 
 

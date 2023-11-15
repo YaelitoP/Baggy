@@ -798,5 +798,4 @@ collision_mask = 2
 position = Vector2(4, -165)
 target_position = Vector2(1, 430)
 
-[connection signal="body_entered" from="detectCollide" to="." method="_on_detect_collide_body_entered"]
 [connection signal="body_entered" from="sight" to="fsm/seek" method="_on_sight_body_entered"]
