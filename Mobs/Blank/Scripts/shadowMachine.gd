@@ -21,7 +21,7 @@ enum STATES {
 
 func _ready():
 	
-	state = SEEK
+	state = SHOOT
 	
 	for child in get_children():
 		child.parent = self.parent

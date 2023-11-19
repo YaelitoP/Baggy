@@ -11,7 +11,7 @@ extends CharacterBody2D
 signal respawn
 
 const SPEED = 850.0
-const SHOT_SPEED = 15300
+const SHOT_SPEED = 800
 const JUMP_VELOCITY = -400.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.

@@ -15,10 +15,10 @@ func _physics_update(_delta):
 		if i.name == "baggy":
 			parent.anim.play("shooted")
 			target = i
-			targetDist = parent.global_position.distance_to(i.global_position) * 1.5
+			targetDist = parent.global_position.distance_to(i.global_position) * 2
 			targetPos = parent.global_position.direction_to(Vector2(i.global_position.x, i.global_position.y * 1.5))
 			parent.velocity = (targetPos * parent.SHOT_SPEED)
-			if targetDist > 5:
-				print("close ", targetDist)
+			if targetDist > 5 or targetDist < -5:
+				print(target.global_position, " close ", targetDist)
 				exit(fsm.SEEK)
 				

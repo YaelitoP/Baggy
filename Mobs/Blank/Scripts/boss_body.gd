@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends CharacterBody2D
 
 @onready var shadow: = preload("res://Mobs/Blank/boss_shadow.tscn")
 @onready var shdInstance: Object 
@@ -7,8 +7,10 @@ extends StaticBody2D
 @onready var shdSpawn: Node = $shdSpawn
 @onready var cd: Node = $cd
 @onready var look_at: Vector2
-@onready var spawn: = false
-
+@onready var spawn: bool = false
+@onready var death: bool = false
+@onready var hits: int = 2
+@onready var animation: Node = $AnimationPlayer
 signal throwShd
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,36 +23,36 @@ func _physics_process(_delta):
 	for body in area.get_overlapping_bodies():
 		if body.name == "baggy":
 			look_at = body.get_global_position()
-
-	if !is_instance_valid(shdInstance) and cd.time_left == 0:
-		spawn = true
-		shdInstance = shadow.instantiate()
-		await get_tree().create_timer(0.5).timeout
-		shdInstance.respawn.connect(respawn_shadow)
-		self.throwShd.connect(shdInstance.throw)
-		shdSpawn.add_child(shdInstance)
-		shdInstance.global_position = shdSpawn.global_position
-		emit_signal("throwShd")
-	
+	if !death:
+		if !is_instance_valid(shdInstance) and cd.time_left == 0:
+			spawn = true
+			shdInstance = shadow.instantiate()
+			await get_tree().create_timer(0.5).timeout
+			shdInstance.respawn.connect(respawn_shadow)
+			self.throwShd.connect(shdInstance.throw)
+			shdSpawn.add_child(shdInstance)
+			shdInstance.global_position = shdSpawn.global_position
+			emit_signal("throwShd")
+		
 
 
 func respawn_shadow():
 	cd.start()
 
 func turnHead():
-	if !spawn and !anim.is_playing():
-		if look_at.x > self.global_position.x + 200 and anim.animation != "turnRight":
+	if !spawn and !anim.is_playing() and !death:
+		if look_at.x > self.global_position.x + 250 and anim.animation != "turnRight":
 			anim.play("turnRight")
-		if look_at.x < self.global_position.x - 200 and anim.animation != "turnLeft":
+		if look_at.x < self.global_position.x - 250 and anim.animation != "turnLeft":
 			anim.play("turnLeft")
 			
-		if look_at.x > self.global_position.x - 190 and look_at.x < self.global_position.x + 190:
+		if look_at.x > self.global_position.x - 200 and look_at.x < self.global_position.x + 190:
 			if anim.get_animation() == "turnLeft":
 				anim.play("turnMidL")
 			if anim.get_animation() == "turnRight":
 				anim.play("turnMidR")
 			
-	elif spawn:
+	elif spawn and !death:
 		
 		if anim.get_animation() == "turnLeft":
 			anim.play("screemL")
@@ -70,5 +72,14 @@ func turnHead():
 func _on_area_2d_body_exited(body):
 	if body == shdInstance:
 		shdInstance.queue_free()
-		print("yeah")
+	pass # Replace with function body.
+
+
+func _on_hurt_area_body_entered(body):
+	if hits != 0:
+		anim.play("hurt")
+		hits = hits - 1
+	elif hits == 0:
+		animation.play("muerte")
+		death = true
 	pass # Replace with function body.

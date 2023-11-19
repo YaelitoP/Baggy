@@ -1,4 +1,4 @@
-[gd_scene load_steps=187 format=3 uid="uid://bws2jsk3nfnng"]
+[gd_scene load_steps=201 format=3 uid="uid://bws2jsk3nfnng"]
 
 [ext_resource type="Script" path="res://Script/baggy/baggy.gd" id="1_q05bf"]
 [ext_resource type="Texture2D" uid="uid://bv247feh6fppd" path="res://Sprite/gabi pj/dash.png" id="2_3r47m"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dsvwja0vvwoqa" path="res://Sprite/gabi pj/dispararMovimientoIzqDiag.png" id="3_ihyb8"]
 [ext_resource type="PackedScene" uid="uid://uotf04jqujlq" path="res://Scenes/fsm.tscn" id="3_jw38x"]
 [ext_resource type="Texture2D" uid="uid://b8v38agkbycv5" path="res://Sprite/gabi pj/saltoDer.png" id="4_6aafp"]
+[ext_resource type="Texture2D" uid="uid://cvouvsvdhg3u8" path="res://Sprite/gabi pj/muerte..png" id="4_af5xd"]
 [ext_resource type="Script" path="res://Script/baggy/idleBaggy.gd" id="4_m443e"]
 [ext_resource type="Texture2D" uid="uid://bk2gfduwkckok" path="res://Sprite/gabi pj/dispararMovimientoIzqUp.png" id="4_rcgiu"]
 [ext_resource type="Texture2D" uid="uid://b6dj2x43s2wm3" path="res://Sprite/gabi pj/saltoizq.png" id="5_ddryn"]
@@ -19,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://cwn7xlrwe78ma" path="res://Sprite/gabi pj/dispararMovimientoDerUp.png" id="7_kc5te"]
 [ext_resource type="Script" path="res://Script/baggy/hurt.gd" id="14_mocvp"]
 [ext_resource type="Script" path="res://Script/baggy/parry.gd" id="15_0tolp"]
+[ext_resource type="Texture2D" uid="uid://jg74v8uf852p" path="res://addons/BurstParticles2D/icon.svg" id="21_7t7x2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1jwfw"]
 size = Vector2(115, 209)
@@ -255,6 +257,30 @@ region = Rect2(3750, 0, 250, 250)
 atlas = ExtResource("2_3r47m")
 region = Rect2(4000, 0, 250, 250)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_q42fg"]
+atlas = ExtResource("4_af5xd")
+region = Rect2(250, 0, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jsmu8"]
+atlas = ExtResource("4_af5xd")
+region = Rect2(500, 0, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_olprm"]
+atlas = ExtResource("4_af5xd")
+region = Rect2(750, 0, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u3q0a"]
+atlas = ExtResource("4_af5xd")
+region = Rect2(1000, 0, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yd260"]
+atlas = ExtResource("4_af5xd")
+region = Rect2(1250, 0, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jx45a"]
+atlas = ExtResource("4_af5xd")
+region = Rect2(1500, 0, 250, 250)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_wllky"]
 atlas = ExtResource("5_ddryn")
 region = Rect2(2500, 0, 250, 250)
@@ -302,6 +328,26 @@ region = Rect2(2500, 0, 250, 250)
 [sub_resource type="AtlasTexture" id="AtlasTexture_g7o6b"]
 atlas = ExtResource("4_6aafp")
 region = Rect2(2250, 0, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yma08"]
+atlas = ExtResource("6_et6q4")
+region = Rect2(0, 0, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wsy0c"]
+atlas = ExtResource("6_et6q4")
+region = Rect2(250, 0, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ja166"]
+atlas = ExtResource("6_et6q4")
+region = Rect2(500, 0, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4sym"]
+atlas = ExtResource("6_et6q4")
+region = Rect2(750, 0, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_16uad"]
+atlas = ExtResource("6_et6q4")
+region = Rect2(1000, 0, 250, 250)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1ts0y"]
 atlas = ExtResource("6_et6q4")
@@ -873,6 +919,29 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_q42fg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jsmu8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_olprm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u3q0a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yd260")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jx45a")
+}],
+"loop": false,
+"name": &"death",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_wllky")
 }, {
 "duration": 1.0,
@@ -916,6 +985,38 @@ animations = [{
 "loop": true,
 "name": &"fallR",
 "speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yma08")
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wsy0c")
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ja166")
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h4sym")
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_16uad")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1248,6 +1349,12 @@ size = Vector2(119, 214)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ivkqp"]
 size = Vector2(120, 230)
 
+[sub_resource type="Curve" id="Curve_mgd42"]
+min_value = -500.0
+max_value = 500.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 1400.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="baggy" type="CharacterBody2D" groups=["player"]]
 collision_mask = 2
 script = ExtResource("1_q05bf")
@@ -1258,8 +1365,7 @@ shape = SubResource("RectangleShape2D_1jwfw")
 
 [node name="sprite_baggy" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5jtvo")
-animation = &"idle"
-frame_progress = 0.155962
+animation = &"hurt"
 
 [node name="FSM" parent="." instance=ExtResource("3_jw38x")]
 
@@ -1319,6 +1425,24 @@ monitorable = false
 [node name="parryColl" type="CollisionShape2D" parent="parryBox"]
 position = Vector2(-42.5, 19.5)
 shape = SubResource("RectangleShape2D_ivkqp")
+
+[node name="dmgEffect" type="CPUParticles2D" parent="."]
+show_behind_parent = true
+emitting = false
+amount = 20
+lifetime = 0.7
+one_shot = true
+speed_scale = 3.0
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 1.0
+texture = ExtResource("21_7t7x2")
+emission_shape = 2
+emission_sphere_radius = 55.12
+orbit_velocity_min = -1000.0
+orbit_velocity_max = 1000.0
+orbit_velocity_curve = SubResource("Curve_mgd42")
+color = Color(1, 0, 0, 1)
 
 [connection signal="timeout" from="Iframes" to="." method="_on_iframes_timeout"]
 [connection signal="timeout" from="Iframes" to="FSM/parry" method="_on_iframes_timeout"]

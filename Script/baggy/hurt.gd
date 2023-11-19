@@ -6,6 +6,7 @@ func _ready():
 	pass # Replace with function body.
 
 func enter():
+	baggy.dmgEffect.restart()
 	baggy.Iframes.start()
 	baggy.emit_signal("hurted")
 	print("auch")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c72fg3pyeoas2"]
+[gd_scene load_steps=9 format=3 uid="uid://c72fg3pyeoas2"]
 
 [ext_resource type="SpriteFrames" uid="uid://6tn8uvjhi4oo" path="res://Mobs/testMob/mob.tres" id="1_fjx33"]
 [ext_resource type="Script" path="res://Mobs/Blank/Scripts/boss_body.gd" id="1_ma1np"]
@@ -6,12 +6,89 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_du83n"]
 radius = 156.051
 
+[sub_resource type="Animation" id="Animation_3nvun"]
+resource_name = "muerte"
+length = 1.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"muerte"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.840896, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 2000)]
+}
+
+[sub_resource type="Animation" id="Animation_4l8id"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"muerte"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2ml5d"]
+_data = {
+"RESET": SubResource("Animation_4l8id"),
+"muerte": SubResource("Animation_3nvun")
+}
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_w0d4e"]
 radius = 3591.07
 
-[node name="bossBody" type="StaticBody2D"]
-collision_layer = 0
-collision_mask = 0
+[sub_resource type="CircleShape2D" id="CircleShape2D_gqs4q"]
+radius = 297.007
+
+[node name="bossBody" type="CharacterBody2D"]
+position = Vector2(0, 1225)
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_ma1np")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -19,7 +96,12 @@ shape = SubResource("CircleShape2D_du83n")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("1_fjx33")
-animation = &"turnMidR"
+animation = &"muerte"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2ml5d")
+}
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -29,8 +111,18 @@ shape = SubResource("CircleShape2D_w0d4e")
 [node name="shdSpawn" type="Marker2D" parent="."]
 position = Vector2(1, 183)
 
+[node name="Iframes" type="Timer" parent="."]
+
 [node name="cd" type="Timer" parent="."]
 wait_time = 2.5
 one_shot = true
 
+[node name="hurtArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 16
+
+[node name="collHurt" type="CollisionShape2D" parent="hurtArea"]
+shape = SubResource("CircleShape2D_gqs4q")
+
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="hurtArea" to="." method="_on_hurt_area_body_entered"]
