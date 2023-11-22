@@ -1,4 +1,14 @@
-[gd_scene format=3 uid="uid://bycnfhav7agpl"]
+[gd_scene load_steps=6 format=3 uid="uid://bycnfhav7agpl"]
+
+[ext_resource type="Script" path="res://Script/start_screen.gd" id="1_ktkq4"]
+[ext_resource type="VideoStream" path="res://Sprite/startVideo/segundo.ogv" id="2_c5vll"]
+[ext_resource type="VideoStream" path="res://Sprite/startVideo/tercero.ogv" id="3_wpc3i"]
+
+[sub_resource type="VideoStreamTheora" id="VideoStreamTheora_rdv1o"]
+file = "res://Sprite/startVideo/primero.ogv"
+
+[sub_resource type="LabelSettings" id="LabelSettings_13lqk"]
+font_size = 26
 
 [node name="startScreen" type="Control"]
 layout_mode = 3
@@ -7,13 +17,64 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_ktkq4")
 
-[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="Container" type="Control" parent="Panel"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+
+[node name="primero" type="VideoStreamPlayer" parent="Panel/Container"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 1163.0
+grow_vertical = 2
+size_flags_horizontal = 0
+stream = SubResource("VideoStreamTheora_rdv1o")
+autoplay = true
+expand = true
+
+[node name="segundo" type="VideoStreamPlayer" parent="Panel/Container"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 1189.0
+grow_vertical = 2
+size_flags_horizontal = 0
+stream = ExtResource("2_c5vll")
+expand = true
+
+[node name="tercero" type="VideoStreamPlayer" parent="Panel/Container"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 1229.0
+grow_vertical = 2
+size_flags_horizontal = 0
+stream = ExtResource("3_wpc3i")
+expand = true
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+label_settings = SubResource("LabelSettings_13lqk")
+
+[connection signal="finished" from="Panel/Container/primero" to="." method="_on_video_stream_player_finished"]
+[connection signal="finished" from="Panel/Container/segundo" to="." method="_on_segundo_finished"]

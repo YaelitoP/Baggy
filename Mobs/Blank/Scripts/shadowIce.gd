@@ -11,6 +11,7 @@ func _ready():
 	pass # Replace with function body.
 
 func enter():
+	parent.anim.set_speed_scale(2)
 	print("ice")
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.

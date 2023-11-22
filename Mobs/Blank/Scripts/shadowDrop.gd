@@ -7,6 +7,7 @@ func _ready():
 	
 func enter():
 	print("drop")
+	parent.anim.set_speed_scale(1.5)
 
 func _physics_update(_delta):
 	parent.anim.play("drop")

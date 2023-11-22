@@ -1560,47 +1560,37 @@ zoom = Vector2(0.7, 0.7)
 
 [node name="healthBar" parent="Camera2D" instance=ExtResource("8_lfkxm")]
 layout_direction = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = -1300.0
-offset_top = -744.0
-offset_right = -1300.0
-offset_bottom = -744.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1330.0
+offset_top = -706.0
+offset_right = -1330.0
+offset_bottom = -706.0
+grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
-size_flags_vertical = 0
+size_flags_vertical = 4
 
 [node name="death" parent="Camera2D" instance=ExtResource("9_jxtbp")]
-offset_left = -156.0
-offset_top = 581.0
-offset_right = -156.0
-offset_bottom = 581.0
+offset_left = 1522.0
+offset_top = 1028.0
+offset_right = 1522.0
+offset_bottom = 1028.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="Pause" parent="Camera2D" instance=ExtResource("10_3aj7y")]
-offset_left = -91.0
-offset_top = 497.0
-offset_right = -91.0
-offset_bottom = 497.0
-
-[node name="VBoxContainer" parent="Camera2D/Pause" index="0"]
-anchors_preset = 15
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 1.0
-offset_left = -254.0
-offset_top = -210.0
-offset_right = 237.0
-offset_bottom = 48.0
-grow_vertical = 2
-
-[node name="HBoxContainer" parent="Camera2D/Pause/VBoxContainer" index="0"]
-size_flags_horizontal = 1
-size_flags_vertical = 8
+visible = false
+offset_left = 1532.0
+offset_top = 1038.0
+offset_right = 1532.0
+offset_bottom = 1038.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="Fondo1" type="Sprite2D" parent="."]
 position = Vector2(7095, 1500)
 texture = ExtResource("6_ntf12")
 
 [editable path="bossBody"]
-[editable path="Camera2D/Pause"]
