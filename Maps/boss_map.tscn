@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c0g5riegms3m3"]
+[gd_scene load_steps=19 format=3 uid="uid://c0g5riegms3m3"]
 
 [ext_resource type="Texture2D" uid="uid://4x4fh2h1u7ij" path="res://icon.svg" id="1_lexe2"]
 [ext_resource type="Texture2D" uid="uid://dn58bf5etlnml" path="res://Sprite/tiles/tailset_bright.png" id="2_h7lkd"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bu5q6gb41h3lm" path="res://Sprite/tiles/twilight-tiles.png" id="5_rvp4o"]
 [ext_resource type="Texture2D" uid="uid://i48u1h15bnrw" path="res://Sprite/fondo 1.png" id="6_ntf12"]
 [ext_resource type="PackedScene" uid="uid://ch8skj8aryuos" path="res://Scenes/healthBar.tscn" id="8_lfkxm"]
+[ext_resource type="PackedScene" uid="uid://bycnfhav7agpl" path="res://Scenes/start_screen.tscn" id="8_qbu5y"]
 [ext_resource type="PackedScene" uid="uid://db6j271mc1b87" path="res://Scenes/death.tscn" id="9_jxtbp"]
 [ext_resource type="PackedScene" uid="uid://dq6384umcuo0" path="res://Scenes/pause.tscn" id="10_3aj7y"]
 
@@ -1489,20 +1490,49 @@ size = Vector2(103, 1519.5)
 [node name="bossMap" type="Node2D"]
 position = Vector2(8, -5)
 
-[node name="ColorRect" type="ColorRect" parent="."]
-z_index = -30
-offset_left = 559.0
-offset_top = 25.0
-offset_right = 599.0
-offset_bottom = 65.0
-scale = Vector2(97.0618, 68.4917)
-color = Color(0, 0, 0, 1)
+[node name="startScreen" parent="." instance=ExtResource("8_qbu5y")]
+top_level = true
+anchor_left = 0.555
+anchor_top = 0.476519
+anchor_right = 2.068
+anchor_bottom = 2.21622
+offset_left = -0.599976
+offset_top = 0.359924
+offset_right = 0.439941
+offset_bottom = 0.47998
 
-[node name="Fondo2Final" type="Sprite2D" parent="."]
-show_behind_parent = true
-z_index = -2
-position = Vector2(2482, 1501)
-texture = ExtResource("4_kl1p5")
+[node name="Container" parent="startScreen" index="1"]
+anchors_preset = 15
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="primero" parent="startScreen/Container" index="0"]
+offset_left = 160.0
+offset_top = -251.5
+offset_right = 1740.0
+offset_bottom = 828.5
+
+[node name="segundo" parent="startScreen/Container" index="1"]
+offset_left = 1472.0
+offset_top = -283.5
+offset_right = 2549.0
+offset_bottom = 476.5
+
+[node name="tercero" parent="startScreen/Container" index="2"]
+offset_left = 1536.0
+offset_top = -283.5
+offset_right = 2093.0
+offset_bottom = 340.5
+
+[node name="Label" parent="startScreen" index="2"]
+anchors_preset = 4
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = 612.0
+offset_top = -154.5
+offset_right = 1180.0
+offset_bottom = -37.5
+grow_horizontal = 1
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(1393, 2375)
@@ -1573,19 +1603,19 @@ size_flags_horizontal = 0
 size_flags_vertical = 4
 
 [node name="death" parent="Camera2D" instance=ExtResource("9_jxtbp")]
-offset_left = 1522.0
-offset_top = 1028.0
-offset_right = 1522.0
-offset_bottom = 1028.0
+offset_left = 1032.0
+offset_top = 690.0
+offset_right = 2021.0
+offset_bottom = 1194.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Pause" parent="Camera2D" instance=ExtResource("10_3aj7y")]
 visible = false
-offset_left = 1532.0
-offset_top = 1038.0
-offset_right = 1532.0
-offset_bottom = 1038.0
+offset_left = 1037.0
+offset_top = 667.0
+offset_right = 2041.0
+offset_bottom = 1219.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
@@ -1593,4 +1623,20 @@ size_flags_vertical = 4
 position = Vector2(7095, 1500)
 texture = ExtResource("6_ntf12")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -3
+offset_left = 559.0
+offset_top = 25.0
+offset_right = 599.0
+offset_bottom = 65.0
+scale = Vector2(97.0618, 68.4917)
+color = Color(0, 0, 0, 1)
+
+[node name="Fondo2Final" type="Sprite2D" parent="."]
+show_behind_parent = true
+z_index = -2
+position = Vector2(2482, 1501)
+texture = ExtResource("4_kl1p5")
+
+[editable path="startScreen"]
 [editable path="bossBody"]

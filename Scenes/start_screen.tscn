@@ -1,8 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://bycnfhav7agpl"]
+[gd_scene load_steps=7 format=3 uid="uid://bycnfhav7agpl"]
 
 [ext_resource type="Script" path="res://Script/start_screen.gd" id="1_ktkq4"]
 [ext_resource type="VideoStream" path="res://Sprite/startVideo/segundo.ogv" id="2_c5vll"]
 [ext_resource type="VideoStream" path="res://Sprite/startVideo/tercero.ogv" id="3_wpc3i"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ycmte"]
+blend_mode = 2
+light_mode = 1
 
 [sub_resource type="VideoStreamTheora" id="VideoStreamTheora_rdv1o"]
 file = "res://Sprite/startVideo/primero.ogv"
@@ -11,15 +15,18 @@ file = "res://Sprite/startVideo/primero.ogv"
 font_size = 26
 
 [node name="startScreen" type="Control"]
+process_mode = 3
 layout_mode = 3
-anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ktkq4")
+metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="Panel" parent="."]
+modulate = Color(0, 0, 0, 1)
+material = SubResource("CanvasItemMaterial_ycmte")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,54 +34,78 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Container" type="Control" parent="Panel"]
+[node name="Container" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
 grow_vertical = 2
 
-[node name="primero" type="VideoStreamPlayer" parent="Panel/Container"]
+[node name="primero" type="VideoStreamPlayer" parent="Container"]
 layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 1163.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1088.0
+offset_top = -284.0
+offset_right = 2668.0
+offset_bottom = 796.0
+grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.486123, 0.514585)
 size_flags_horizontal = 0
 stream = SubResource("VideoStreamTheora_rdv1o")
 autoplay = true
-expand = true
 
-[node name="segundo" type="VideoStreamPlayer" parent="Panel/Container"]
+[node name="segundo" type="VideoStreamPlayer" parent="Container"]
 layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 1189.0
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 1088.0
+offset_top = -284.0
+offset_right = 2165.0
+offset_bottom = 476.0
 grow_vertical = 2
 size_flags_horizontal = 0
 stream = ExtResource("2_c5vll")
-expand = true
 
-[node name="tercero" type="VideoStreamPlayer" parent="Panel/Container"]
+[node name="tercero" type="VideoStreamPlayer" parent="Container"]
 layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 1229.0
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 1152.0
+offset_top = -284.0
+offset_right = 1709.0
+offset_bottom = 340.0
 grow_vertical = 2
 size_flags_horizontal = 0
 stream = ExtResource("3_wpc3i")
-expand = true
 
-[node name="Label" type="Label" parent="Panel"]
+[node name="Label" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 11
+anchors_preset = 6
 anchor_left = 1.0
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -1.0
+anchor_bottom = 0.5
+offset_left = -1656.0
+offset_top = -284.0
+offset_right = -1088.0
+offset_bottom = 172.0
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
+text = "No entiendo como es esto pero es tan simple
+como saber en que momento hacer el corte
+yo con el enter y no lo hace solo el game
+"
 label_settings = SubResource("LabelSettings_13lqk")
+visible_characters_behavior = 1
+text_direction = 1
 
-[connection signal="finished" from="Panel/Container/primero" to="." method="_on_video_stream_player_finished"]
-[connection signal="finished" from="Panel/Container/segundo" to="." method="_on_segundo_finished"]
+[connection signal="finished" from="Container/primero" to="." method="_on_video_stream_player_finished"]
+[connection signal="finished" from="Container/segundo" to="." method="_on_segundo_finished"]
+[connection signal="finished" from="Container/tercero" to="." method="_on_tercero_finished"]
