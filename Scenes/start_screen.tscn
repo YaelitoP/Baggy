@@ -12,15 +12,17 @@ light_mode = 1
 file = "res://Sprite/startVideo/primero.ogv"
 
 [sub_resource type="LabelSettings" id="LabelSettings_13lqk"]
-font_size = 26
+font_size = 30
 
 [node name="startScreen" type="Control"]
 process_mode = 3
 layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_ktkq4")
 metadata/_edit_use_anchors_ = true
 
@@ -33,12 +35,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Container" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="primero" type="VideoStreamPlayer" parent="Container"]
 layout_mode = 1
@@ -63,10 +67,10 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 1088.0
-offset_top = -284.0
-offset_right = 2165.0
-offset_bottom = 476.0
+offset_left = 1152.0
+offset_top = -228.0
+offset_right = 2229.0
+offset_bottom = 532.0
 grow_vertical = 2
 size_flags_horizontal = 0
 stream = ExtResource("2_c5vll")
@@ -91,17 +95,16 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -1656.0
-offset_top = -284.0
-offset_right = -1088.0
-offset_bottom = 172.0
+offset_left = -2200.0
+offset_top = -244.0
+offset_right = -1232.0
+offset_bottom = 212.0
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
-text = "No entiendo como es esto pero es tan simple
-como saber en que momento hacer el corte
-yo con el enter y no lo hace solo el game
-"
+text = "Es otra noche más, estoy cansado y no sé si hice suficiente...
+La realidad se va, dejando paso a mi imaginación; ahí soy menos yo, 
+soy Polvorín... Ganémosle al boss..."
 label_settings = SubResource("LabelSettings_13lqk")
 visible_characters_behavior = 1
 text_direction = 1

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b85taoag0kuik"]
 
 [ext_resource type="Script" path="res://Script/bullet.gd" id="1_domf5"]
-[ext_resource type="Texture2D" uid="uid://4x4fh2h1u7ij" path="res://icon.svg" id="1_u3v8g"]
+[ext_resource type="Texture2D" uid="uid://dfhvu7q5qqspd" path="res://Sprite/bullet.png" id="2_r3gvw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3hxic"]
 radius = 6.06716
@@ -23,10 +23,9 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_3hxic")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(7.45058e-09, 2.38419e-07)
-rotation = 1.5708
-scale = Vector2(0.0766328, 0.146996)
-texture = ExtResource("1_u3v8g")
+position = Vector2(4, -4)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_r3gvw")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 16

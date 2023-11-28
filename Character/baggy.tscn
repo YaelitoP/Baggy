@@ -1401,7 +1401,7 @@ wait_time = 0.8
 one_shot = true
 
 [node name="reload" type="Timer" parent="."]
-wait_time = 0.15
+wait_time = 0.2
 one_shot = true
 
 [node name="Iframes" type="Timer" parent="."]
@@ -1443,6 +1443,8 @@ orbit_velocity_min = -1000.0
 orbit_velocity_max = 1000.0
 orbit_velocity_curve = SubResource("Curve_mgd42")
 color = Color(1, 0, 0, 1)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="timeout" from="Iframes" to="." method="_on_iframes_timeout"]
 [connection signal="timeout" from="Iframes" to="FSM/parry" method="_on_iframes_timeout"]

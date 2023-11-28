@@ -9,7 +9,7 @@ extends CharacterBody2D
 @onready var look_at: Vector2
 @onready var spawn: bool = false
 @onready var death: bool = false
-@onready var hits: int = 2
+@onready var hits: int = 100
 @onready var animation: Node = $AnimationPlayer
 signal throwShd
 # Called when the node enters the scene tree for the first time.
@@ -77,7 +77,16 @@ func _on_area_2d_body_exited(body):
 
 func _on_hurt_area_body_entered(body):
 	if hits != 0:
-		anim.play("hurt")
+		
+		if anim.get_animation() == "turnLeft":
+			anim.play("hurtL")
+		
+		elif anim.get_animation() == "turnRight":
+			anim.play("hurtR")
+			
+		elif !anim.get_animation() == "hurtL" or !anim.get_animation() == "hurtR":
+			anim.play("hurt")
+		
 		hits = hits - 1
 	elif hits == 0:
 		animation.play("muerte")

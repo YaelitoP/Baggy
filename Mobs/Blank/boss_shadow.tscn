@@ -90,22 +90,10 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("detectCollide:monitoring")
+tracks/6/path = NodePath(".:collision_mask")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath(".:collision_mask")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -407,18 +395,6 @@ tracks/6/keys = {
 "method": &"queue_free"
 }]
 }
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("detectCollide:monitoring")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0, 2.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a8xod"]
 radius = 85.0
@@ -599,22 +575,10 @@ tracks/1/path = NodePath("sprite_shadow:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("detectCollide:monitoring")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.1, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
+"values": [2, 3, 4, 5, 6, 7, 8, 7, 8, 7, 8]
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xrml6"]
@@ -783,26 +747,78 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("detectCollide:monitoring")
+tracks/7/path = NodePath(".:collision_mask")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0, 1.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false, true]
+"values": [0, 2]
 }
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath(".:collision_mask")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0, 1.6),
+
+[sub_resource type="Animation" id="Animation_b7xkp"]
+resource_name = "idle"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite_shadow:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"spawn"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite_shadow:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0, 2]
+"values": [4, 4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("coll_shadow:shape")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("CircleShape2D_xrml6")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = false
+tracks/3/path = NodePath("coll_shadow:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("coll_shadow:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(4, -165)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p05ux"]
@@ -811,15 +827,13 @@ _data = {
 "drop": SubResource("Animation_44unm"),
 "dropIce": SubResource("Animation_dx7gj"),
 "ice": SubResource("Animation_uapvr"),
+"idle": SubResource("Animation_b7xkp"),
 "moveLeft": SubResource("Animation_22abo"),
 "moveRight": SubResource("Animation_qdd6c"),
 "shooted": SubResource("Animation_4dia0"),
 "spawn": SubResource("Animation_lc5fo"),
 "strike": SubResource("Animation_s5wa1")
 }
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_oyewm"]
-radius = 96.0052
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2pwlf"]
 radius = 2258.0
@@ -851,15 +865,6 @@ autoplay = "spawn"
 libraries = {
 "": SubResource("AnimationLibrary_p05ux")
 }
-
-[node name="detectCollide" type="Area2D" parent="."]
-modulate = Color(0.952941, 0, 0.45098, 1)
-position = Vector2(6.15381, -163.846)
-collision_layer = 4
-
-[node name="collDetect" type="CollisionShape2D" parent="detectCollide"]
-position = Vector2(6.10352e-05, 0)
-shape = SubResource("CircleShape2D_oyewm")
 
 [node name="sight" type="Area2D" parent="."]
 modulate = Color(0.54902, 1, 0.647059, 0.32549)
@@ -896,4 +901,14 @@ collision_mask = 2
 position = Vector2(6.15381, -163.846)
 target_position = Vector2(6.10352e-05, 443.077)
 
+[node name="aimRay" type="RayCast2D" parent="."]
+target_position = Vector2(0, 550)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="atkTime" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+
 [connection signal="body_entered" from="sight" to="fsm/seek" method="_on_sight_body_entered"]
+[connection signal="timeout" from="atkTime" to="fsm/seek" method="_on_atk_time_timeout"]

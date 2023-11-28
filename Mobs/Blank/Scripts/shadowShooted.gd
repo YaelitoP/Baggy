@@ -3,7 +3,7 @@ extends baseState
 
 @onready var target: Object
 @onready var targetPos: Vector2
-@onready var targetDist: float
+@onready var _targetDist: float
 @onready var shootDist: float = 260
 @onready var next: Object
 
@@ -15,10 +15,9 @@ func _physics_update(_delta):
 		if i.name == "baggy":
 			parent.anim.play("shooted")
 			target = i
-			targetDist = parent.global_position.distance_to(i.global_position) * 2
-			targetPos = parent.global_position.direction_to(Vector2(i.global_position.x, i.global_position.y * 1.5))
-			parent.velocity = (targetPos * parent.SHOT_SPEED)
-			if targetDist > 5 or targetDist < -5:
-				print(target.global_position, " close ", targetDist)
-				exit(fsm.SEEK)
-				
+			targetPos = parent.global_position.direction_to(Vector2(i.global_position.x, i.global_position.y))
+			parent.velocity = (targetPos * parent.SHOT_SPEED) * 2
+	if parent.aimRay.is_colliding():
+		parent.anim.play("idle")
+		exit(fsm.SEEK)
+		pass

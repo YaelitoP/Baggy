@@ -7,7 +7,9 @@ extends CharacterBody2D
 @onready var aimed: Object = $atkRay
 @onready var fsm: Object = $fsm
 @onready var hitbox: Node = $coll_shadow
-@onready var detect: Node = $detectCollide
+@onready var aimRay = $aimRay
+@onready var atkTime = $atkTime
+
 signal respawn
 
 const SPEED = 850.0
@@ -27,5 +29,6 @@ func _physics_process(_delta):
 func throw():
 	fsm.call_deferred("change_to", fsm.SHOOT)
 	
+
 
 

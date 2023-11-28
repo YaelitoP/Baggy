@@ -10,6 +10,7 @@ extends CharacterBody2D
 @onready var Iframes: Node = $Iframes
 @onready var airTime: Node = $airTime
 @onready var dmgEffect: Node = $dmgEffect
+@onready var audio = $AudioStreamPlayer
 
 
 @onready var dashing: bool = false
@@ -21,6 +22,7 @@ extends CharacterBody2D
 @onready var bullet_path: Object = preload("res://Scenes/bullet.tscn")
 
 @onready var bullet: Node
+
 
 signal hurted
 signal pause
@@ -71,17 +73,32 @@ func _physics_process(_delta):
 		dashing = false
 
 
-
 func dash():
 	if wait.time_left != 0:
 		dashing = true
 
 
 func shooting():
+	var RIGHT: = Input.is_action_pressed("right")
+	var LEFT: = Input.is_action_pressed("left")
+	var UP: = Input.is_action_pressed("up")
+	var _DOWN: = Input.is_action_pressed("crounch")
+	var JUMP: = Input.is_action_pressed("jump")
+	var DASH: = Input.is_action_pressed("dash")
 	
 	if reload.time_left == 0 and is_on_floor():
 		bullet = bullet_path.instantiate()
 		add_child(bullet)
+		if UP and RIGHT:
+			bullet.rotation_degrees = -45
+		elif UP and LEFT:
+			bullet.rotation_degrees = 45
+		elif _DOWN:
+			bullet.rotation_degrees = 90
+		elif LEFT:
+			bullet.rotation_degrees = 180
+		elif UP:
+			bullet.rotation_degrees = -90
 		bullet.apply_central_impulse(aiming * bullet.speed)
 		reload.start()
 		

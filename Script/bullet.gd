@@ -14,6 +14,7 @@ func _physics_process(delta):
 	distance_traveled += distance
 	if distance_traveled > MAX_RANGE:
 		queue_free()
+	
 
 
 func _on_area_2d_body_entered(_body):
