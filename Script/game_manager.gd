@@ -1,8 +1,8 @@
 extends Node
 class_name barbudo
 
-@onready var start: bool = false
 
+@onready var start: bool = false
 
 func _ready():
 	pass

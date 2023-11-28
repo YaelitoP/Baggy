@@ -9,6 +9,11 @@ extends CharacterBody2D
 @onready var hitbox: Node = $coll_shadow
 @onready var aimRay = $aimRay
 @onready var atkTime = $atkTime
+@onready var audio = $AudioStreamPlayer2D
+
+@onready var strike: = preload("res://SFX/strike.mp3")
+@onready var ice: = preload("res://SFX/Ice.wav")
+@onready var drop: = preload("res://SFX/drop.wav")
 
 signal respawn
 

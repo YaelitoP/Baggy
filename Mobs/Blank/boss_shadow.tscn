@@ -1,10 +1,14 @@
-[gd_scene load_steps=29 format=3 uid="uid://c0vls3nykw4pg"]
+[gd_scene load_steps=33 format=3 uid="uid://c0vls3nykw4pg"]
 
 [ext_resource type="SpriteFrames" uid="uid://y56ctx8byctt" path="res://Mobs/Blank/boss_shadow.tres" id="1_mcovi"]
 [ext_resource type="Script" path="res://Mobs/Blank/Scripts/boss_shadow.gd" id="1_mn7hu"]
+[ext_resource type="AudioStream" uid="uid://d168xv7bicswn" path="res://SFX/drop.wav" id="3_gsc8t"]
 [ext_resource type="Script" path="res://Mobs/Blank/Scripts/shadowMachine.gd" id="3_lnfbd"]
+[ext_resource type="AudioStream" uid="uid://5tc8gljb8ooh" path="res://SFX/Ice.wav" id="3_ywp6w"]
+[ext_resource type="AudioStream" uid="uid://cjeeifsa5242l" path="res://SFX/mixkit-broken-radio-frequency-signal-2563.wav" id="4_8hh87"]
 [ext_resource type="Script" path="res://Mobs/Blank/Scripts/shadowShooted.gd" id="4_r7rp1"]
 [ext_resource type="Script" path="res://Mobs/Blank/Scripts/shadowSeek.gd" id="5_acesw"]
+[ext_resource type="AudioStream" uid="uid://dc4mhmnttquh8" path="res://SFX/strike.mp3" id="5_pqmpl"]
 [ext_resource type="Script" path="res://Mobs/Blank/Scripts/shadowDrop.gd" id="6_p702u"]
 [ext_resource type="Script" path="res://Mobs/Blank/Scripts/shadowStrike.gd" id="7_1f0p0"]
 [ext_resource type="Script" path="res://Mobs/Blank/Scripts/shadowIce.gd" id="8_377rf"]
@@ -214,6 +218,21 @@ tracks/7/keys = {
 "update": 1,
 "values": [0, 2]
 }
+tracks/8/type = "audio"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("AudioStreamPlayer2D")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_gsc8t")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/8/use_blend = true
 
 [sub_resource type="Animation" id="Animation_dx7gj"]
 resource_name = "dropIce"
@@ -302,6 +321,21 @@ tracks/6/keys = {
 "update": 1,
 "values": [0, 2]
 }
+tracks/7/type = "audio"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AudioStreamPlayer2D")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"clips": [{
+"end_offset": 0.468084,
+"start_offset": 0.0,
+"stream": ExtResource("3_gsc8t")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/7/use_blend = true
 
 [sub_resource type="Animation" id="Animation_uapvr"]
 resource_name = "ice"
@@ -395,6 +429,21 @@ tracks/6/keys = {
 "method": &"queue_free"
 }]
 }
+tracks/7/type = "audio"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AudioStreamPlayer2D")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_ywp6w")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/7/use_blend = true
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a8xod"]
 radius = 85.0
@@ -474,6 +523,21 @@ tracks/5/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/6/type = "audio"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AudioStreamPlayer2D")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_gsc8t")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/6/use_blend = true
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uljxw"]
 radius = 85.0
@@ -553,6 +617,21 @@ tracks/5/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/6/type = "audio"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AudioStreamPlayer2D")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_gsc8t")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/6/use_blend = true
 
 [sub_resource type="Animation" id="Animation_4dia0"]
 resource_name = "shooted"
@@ -756,6 +835,25 @@ tracks/7/keys = {
 "update": 1,
 "values": [0, 2]
 }
+tracks/8/type = "audio"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("AudioStreamPlayer2D")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_8hh87")
+}, {
+"end_offset": 1.66515,
+"start_offset": 0.417165,
+"stream": ExtResource("5_pqmpl")
+}],
+"times": PackedFloat32Array(0, 0.922696)
+}
+tracks/8/use_blend = true
 
 [sub_resource type="Animation" id="Animation_b7xkp"]
 resource_name = "idle"
@@ -909,6 +1007,8 @@ collide_with_areas = true
 [node name="atkTime" type="Timer" parent="."]
 wait_time = 0.6
 one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="body_entered" from="sight" to="fsm/seek" method="_on_sight_body_entered"]
 [connection signal="timeout" from="atkTime" to="fsm/seek" method="_on_atk_time_timeout"]

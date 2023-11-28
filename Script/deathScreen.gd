@@ -2,7 +2,11 @@ extends Control
 
 @onready var anim: Node = $VBoxContainer/HBoxContainer/Button/AnimatedSprite2D
 @onready var button: Node = $VBoxContainer/HBoxContainer/Button
+@onready var audio = $AudioStreamPlayer
 
+@onready var retry: = preload("res://SFX/retryButton.mp3")
+@onready var exit: = preload("res://SFX/ExitButton.wav")
+@onready var crash: = preload("res://SFX/death.mp3")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -15,6 +19,9 @@ func _process(_delta):
 	pass
 
 func death():
+	get_tree().set_pause(true)
+	audio.set_stream(crash)
+	audio.play()
 	visible = true
 
 func _on_button_focus_entered():
@@ -38,11 +45,15 @@ func _on_button_mouse_exited():
 
 
 func _on_button_2_pressed():
+	audio.set_stream(exit)
+	audio.play()
 	get_tree().quit()
 	pass # Replace with function body.
 
 
 func _on_button_pressed():
+	audio.set_stream(retry)
+	audio.play()
 	get_tree().reload_current_scene()
 	pass # Replace with function body.
 

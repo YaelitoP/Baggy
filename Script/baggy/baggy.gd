@@ -22,8 +22,9 @@ extends CharacterBody2D
 @onready var bullet_path: Object = preload("res://Scenes/bullet.tscn")
 
 @onready var bullet: Node
-
-
+@onready var hitSound: = preload("res://SFX/baggyHit.mp3")
+@onready var shot: = preload("res://SFX/shot.wav")
+@onready var dashSound: = preload("res://SFX/dash.wav")
 signal hurted
 signal pause
 signal dead
@@ -74,6 +75,8 @@ func _physics_process(_delta):
 
 
 func dash():
+	audio.set_stream(dashSound)
+	audio.play()
 	if wait.time_left != 0:
 		dashing = true
 
@@ -85,27 +88,31 @@ func shooting():
 	var _DOWN: = Input.is_action_pressed("crounch")
 	var JUMP: = Input.is_action_pressed("jump")
 	var DASH: = Input.is_action_pressed("dash")
-	
-	if reload.time_left == 0 and is_on_floor():
-		bullet = bullet_path.instantiate()
-		add_child(bullet)
-		if UP and RIGHT:
-			bullet.rotation_degrees = -45
-		elif UP and LEFT:
-			bullet.rotation_degrees = 45
-		elif _DOWN:
-			bullet.rotation_degrees = 90
-		elif LEFT:
-			bullet.rotation_degrees = 180
-		elif UP:
-			bullet.rotation_degrees = -90
-		bullet.apply_central_impulse(aiming * bullet.speed)
-		reload.start()
-		
+	if !dashing:
+		if reload.time_left == 0 and is_on_floor():
+			audio.set_stream(shot)
+			audio.play()
+			bullet = bullet_path.instantiate()
+			add_child(bullet)
+			if UP and RIGHT:
+				bullet.rotation_degrees = -45
+			elif UP and LEFT:
+				bullet.rotation_degrees = 45
+			elif _DOWN:
+				bullet.rotation_degrees = 90
+			elif LEFT:
+				bullet.rotation_degrees = 180
+			elif UP:
+				bullet.rotation_degrees = -90
+			bullet.apply_central_impulse(aiming * bullet.speed)
+			reload.start()
+			
 	
 
 
 func invencible():
+	audio.set_stream(hitSound)
+	audio.play()
 	if Iframes.time_left != 0:
 		hurtBox.monitoring = false
 		set_collision_layer_value(1, false)
@@ -123,11 +130,11 @@ func anim():
 	var _DOWN: = Input.is_action_pressed("crounch")
 	var JUMP: = Input.is_action_pressed("jump")
 	var DASH: = Input.is_action_pressed("dash")
-	
+	var STAY: = Input.is_action_pressed("lock")
 	if !death:
 		if Iframes.time_left != 0:
 			sprite.play("hurt")
-		elif is_on_floor() and !dashing:
+		elif is_on_floor() and !dashing and !STAY:
 			if (RIGHT or LEFT) and UP:
 				aiming = Input.get_vector("left", "right", "up", "crounch") 
 				
@@ -188,7 +195,22 @@ func anim():
 				if looking == Vector2.RIGHT:
 					sprite.play("fallR")
 				
+			if STAY:
+				if LEFT:
+						aiming = Vector2.LEFT
+						looking = aiming
+						parry.position.x = -35
+						sprite.play("staticL")
+					
+				if RIGHT:
+					aiming = Vector2.RIGHT
+					looking = aiming
+					parry.position.x = 120
+					sprite.play("staticR")
 				
+				if UP:
+					aiming = Vector2.UP
+					sprite.play("staticU")
 			
 			if DASH and !self.is_on_floor():
 				if looking == Vector2.LEFT:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c0g5riegms3m3"]
+[gd_scene load_steps=21 format=3 uid="uid://c0g5riegms3m3"]
 
 [ext_resource type="Texture2D" uid="uid://4x4fh2h1u7ij" path="res://icon.svg" id="1_lexe2"]
 [ext_resource type="Texture2D" uid="uid://dn58bf5etlnml" path="res://Sprite/tiles/tailset_bright.png" id="2_h7lkd"]
@@ -7,12 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://dj32ay8smp7v0" path="res://Sprite/tiles/platformertiles.png" id="4_3qrqo"]
 [ext_resource type="Texture2D" uid="uid://b0pnfce7deppv" path="res://Sprite/fondo2final.png" id="4_kl1p5"]
 [ext_resource type="Texture2D" uid="uid://bu5q6gb41h3lm" path="res://Sprite/tiles/twilight-tiles.png" id="5_rvp4o"]
-[ext_resource type="Texture2D" uid="uid://i48u1h15bnrw" path="res://Sprite/fondo 1.png" id="6_ntf12"]
 [ext_resource type="PackedScene" uid="uid://ch8skj8aryuos" path="res://Scenes/healthBar.tscn" id="8_lfkxm"]
 [ext_resource type="PackedScene" uid="uid://bycnfhav7agpl" path="res://Scenes/start_screen.tscn" id="8_qbu5y"]
 [ext_resource type="PackedScene" uid="uid://db6j271mc1b87" path="res://Scenes/death.tscn" id="9_jxtbp"]
 [ext_resource type="PackedScene" uid="uid://dq6384umcuo0" path="res://Scenes/pause.tscn" id="10_3aj7y"]
+[ext_resource type="Texture2D" uid="uid://b5emf6wekgpty" path="res://Sprite/gameover-sheet.png" id="13_bero3"]
 [ext_resource type="AudioStream" uid="uid://bc00owllsh3qw" path="res://SFX/Blank background (factor).mp3" id="13_x55nr"]
+[ext_resource type="Script" path="res://Script/Gameover-sheet.gd" id="14_j5k0s"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cj70x"]
 resource_name = "bright"
@@ -1631,10 +1632,6 @@ offset_bottom = 1219.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Fondo1" type="Sprite2D" parent="."]
-position = Vector2(7095, 1500)
-texture = ExtResource("6_ntf12")
-
 [node name="Fondo2Final" type="Sprite2D" parent="."]
 show_behind_parent = true
 z_index = -2
@@ -1643,8 +1640,15 @@ texture = ExtResource("4_kl1p5")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_x55nr")
-volume_db = -20.0
+volume_db = -15.0
 autoplay = true
+
+[node name="Gameover-sheet" type="Sprite2D" parent="." groups=["end"]]
+process_mode = 3
+visible = false
+position = Vector2(2482, 1496)
+texture = ExtResource("13_bero3")
+script = ExtResource("14_j5k0s")
 
 [editable path="startScreen"]
 [editable path="bossBody"]

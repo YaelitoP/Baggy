@@ -19,16 +19,11 @@ func _ready():
 	pass
 
 func _process(delta):
-	if !barbudo.start:
-		time_since_last_char += delta
-		if time_since_last_char >= text_speed and label.get_visible_characters() < fullText:
-			char_index += 1
-			label.set_visible_characters(char_index)
-			time_since_last_char = 0
-	else:
-		queue_free()
-	pass
-
+	time_since_last_char += delta
+	if time_since_last_char >= text_speed and label.get_visible_characters() < fullText:
+		char_index += 1
+		label.set_visible_characters(char_index)
+		time_since_last_char = 0
 
 func _on_video_stream_player_finished():
 	segundo.play()

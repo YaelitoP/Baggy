@@ -65,5 +65,7 @@ texture_normal = ExtResource("2_fdsjr")
 texture_hover = ExtResource("3_hewd8")
 texture_focused = ExtResource("3_hewd8")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/TextureButton" to="." method="_on_texture_button_pressed"]

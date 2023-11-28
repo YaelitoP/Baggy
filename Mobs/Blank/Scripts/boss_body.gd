@@ -9,20 +9,31 @@ extends CharacterBody2D
 @onready var look_at: Vector2
 @onready var spawn: bool = false
 @onready var death: bool = false
-@onready var hits: int = 100
+@onready var hits: int = 15
 @onready var animation: Node = $AnimationPlayer
+@onready var audio = $AudioStreamPlayer2D
+
+@onready var hit: = preload("res://SFX/hit.wav")
+@onready var screem: = preload("res://SFX/Screem.wav")
+
+signal win
 signal throwShd
-# Called when the node enters the scene tree for the first time.
+
+
 func _ready():
 	cd.start()
 
 func _physics_process(_delta):
 	
 	turnHead()
-	
+	for node in get_tree().get_nodes_in_group("end"):
+		if node.has_method("ending"):
+			if !is_connected("win", node.ending):
+				connect("win", node.ending)
 	for body in area.get_overlapping_bodies():
 		if body.name == "baggy":
 			look_at = body.get_global_position()
+		
 	if !death:
 		if !is_instance_valid(shdInstance) and cd.time_left == 0:
 			spawn = true
@@ -56,13 +67,19 @@ func turnHead():
 		
 		if anim.get_animation() == "turnLeft":
 			anim.play("screemL")
+			audio.set_stream(screem)
+			audio.play()
 			spawn = false
 		
 		elif anim.get_animation() == "turnRight":
 			anim.play("screemR")
+			audio.set_stream(screem)
+			audio.play()
 			spawn = false
 		
 		elif anim.get_animation() == "turnMidR" or anim.get_animation() == "turnMidL" or anim.get_animation() == "screem":
+			audio.set_stream(screem)
+			audio.play()
 			anim.play("screem")
 			spawn = false
 		else:
@@ -72,12 +89,13 @@ func turnHead():
 func _on_area_2d_body_exited(body):
 	if body == shdInstance:
 		shdInstance.queue_free()
-	pass # Replace with function body.
+
 
 
 func _on_hurt_area_body_entered(body):
 	if hits != 0:
-		
+		audio.set_stream(hit)
+		audio.play()
 		if anim.get_animation() == "turnLeft":
 			anim.play("hurtL")
 		
@@ -91,4 +109,9 @@ func _on_hurt_area_body_entered(body):
 	elif hits == 0:
 		animation.play("muerte")
 		death = true
+
+
+
+func _on_animation_player_animation_finished(anim_name):
+	emit_signal("win")
 	pass # Replace with function body.
