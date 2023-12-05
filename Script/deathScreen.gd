@@ -47,6 +47,7 @@ func _on_button_mouse_exited():
 func _on_button_2_pressed():
 	audio.set_stream(exit)
 	audio.play()
+	await get_tree().create_timer(0.4).timeout 
 	get_tree().quit()
 	pass # Replace with function body.
 
@@ -54,6 +55,7 @@ func _on_button_2_pressed():
 func _on_button_pressed():
 	audio.set_stream(retry)
 	audio.play()
+	await get_tree().create_timer(0.4).timeout 
 	get_tree().reload_current_scene()
 	pass # Replace with function body.
 

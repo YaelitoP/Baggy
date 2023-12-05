@@ -26,6 +26,7 @@ func pause():
 func _on_button_2_pressed():
 	audio.set_stream(retry)
 	audio.play()
+	await get_tree().create_timer(0.2).timeout 
 	get_tree().set_pause(false)
 	visible = false
 	for node in get_tree().get_nodes_in_group("player"):

@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bycnfhav7agpl"]
+[gd_scene load_steps=8 format=3 uid="uid://bycnfhav7agpl"]
 
 [ext_resource type="Script" path="res://Script/start_screen.gd" id="1_ktkq4"]
 [ext_resource type="VideoStream" path="res://Sprite/startVideo/segundo.ogv" id="2_c5vll"]
 [ext_resource type="VideoStream" path="res://Sprite/startVideo/tercero.ogv" id="3_wpc3i"]
+[ext_resource type="AudioStream" uid="uid://bkf67cdnwwhj3" path="res://SFX/sleepingPills.wav" id="4_svy7s"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ycmte"]
 blend_mode = 2
@@ -108,6 +109,10 @@ soy Polvorín... Ganémosle al boss..."
 label_settings = SubResource("LabelSettings_13lqk")
 visible_characters_behavior = 1
 text_direction = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_svy7s")
+autoplay = true
 
 [connection signal="finished" from="Container/primero" to="." method="_on_video_stream_player_finished"]
 [connection signal="finished" from="Container/segundo" to="." method="_on_segundo_finished"]

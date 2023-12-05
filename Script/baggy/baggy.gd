@@ -12,7 +12,7 @@ extends CharacterBody2D
 @onready var dmgEffect: Node = $dmgEffect
 @onready var audio = $AudioStreamPlayer
 
-
+@onready var walking: bool = false
 @onready var dashing: bool = false
 @onready var jumping: bool = false
 @onready var death: bool = false
@@ -24,7 +24,9 @@ extends CharacterBody2D
 @onready var bullet: Node
 @onready var hitSound: = preload("res://SFX/baggyHit.mp3")
 @onready var shot: = preload("res://SFX/shot.wav")
-@onready var dashSound: = preload("res://SFX/dash.wav")
+@onready var dashSound: = preload("res://SFX/dashNoise.wav")
+@onready var steps: = preload("res://SFX/run.mp3")
+
 signal hurted
 signal pause
 signal dead
@@ -60,7 +62,10 @@ func _physics_process(_delta):
 		stop = true
 		get_tree().paused = true
 		emit_signal("pause")
-	
+	if walking and !audio.playing:
+		audio.set_stream(steps)
+		audio.play()
+		
 	if life == 0:
 		death = true
 	
@@ -75,6 +80,7 @@ func _physics_process(_delta):
 
 
 func dash():
+	walking = false
 	audio.set_stream(dashSound)
 	audio.play()
 	if wait.time_left != 0:
@@ -123,7 +129,6 @@ func invencible():
 
 
 func anim():
-	
 	var RIGHT: = Input.is_action_pressed("right")
 	var LEFT: = Input.is_action_pressed("left")
 	var UP: = Input.is_action_pressed("up")
@@ -131,41 +136,53 @@ func anim():
 	var JUMP: = Input.is_action_pressed("jump")
 	var DASH: = Input.is_action_pressed("dash")
 	var STAY: = Input.is_action_pressed("lock")
+	
 	if !death:
+		
 		if Iframes.time_left != 0:
 			sprite.play("hurt")
+			
 		elif is_on_floor() and !dashing and !STAY:
+				
 			if (RIGHT or LEFT) and UP:
 				aiming = Input.get_vector("left", "right", "up", "crounch") 
 				
 				if aiming.y <= -0.7 and aiming.x <= -0.7:
 					sprite.play("shootLD")
 					looking = Vector2.LEFT
+					walking = true
+					
 				if aiming.y <= 0.7 and aiming.x >= 0.7:
 					sprite.play("shootRD")
 					looking = Vector2.RIGHT
+					walking = true
+					
 			elif RIGHT or LEFT or UP:
+				
 				if LEFT:
 					aiming = Vector2.LEFT
 					looking = aiming
 					parry.position.x = -35
 					sprite.play("shootL")
+					walking = true
 				
 				if RIGHT:
 					aiming = Vector2.RIGHT
 					looking = aiming
 					parry.position.x = 120
 					sprite.play("shootR")
+					walking = true
 				
 				if UP:
 					aiming = Vector2.UP
 					
 					if looking == Vector2.LEFT:
 						sprite.play("shootLU")
+						walking = true
 						
 					if looking == Vector2.RIGHT:
 						sprite.play("shootRU")
-					
+						walking = true
 					
 				elif Input.is_action_just_released("up"):
 					aiming = looking
@@ -177,55 +194,77 @@ func anim():
 						sprite.play("shootR")
 			else:
 				sprite.play("idle")
-			
+				walking = false
+				
 		else:
 			
 			if JUMP:
+				
 				if looking == Vector2.LEFT:
 					sprite.play("jumpL")
-				
+					walking = false
+					
 				if looking == Vector2.RIGHT:
 					sprite.play("jumpR")
-				
+					walking = false
 				
 			elif !self.is_on_floor() and !dashing and airTime.time_left == 0:
+				
 				if looking == Vector2.LEFT:
 					sprite.play("fallL")
-				
+					walking = false
+					
 				if looking == Vector2.RIGHT:
 					sprite.play("fallR")
-				
-			if STAY:
-				if LEFT:
-						aiming = Vector2.LEFT
-						looking = aiming
-						parry.position.x = -35
-						sprite.play("staticL")
+					walking = false
 					
-				if RIGHT:
-					aiming = Vector2.RIGHT
-					looking = aiming
-					parry.position.x = 120
-					sprite.play("staticR")
-				
-				if UP:
-					aiming = Vector2.UP
-					sprite.play("staticU")
-			
+			if STAY:
+				walking = false
+				if (RIGHT or LEFT) and UP:
+					aiming = Input.get_vector("left", "right", "up", "crounch") 
+					if aiming.y <= -0.7 and aiming.x <= -0.7:
+						sprite.play("staticLD")
+						looking = Vector2.LEFT
+					
+					if aiming.y <= 0.7 and aiming.x >= 0.7:
+						sprite.play("staticRD")
+						looking = Vector2.RIGHT
+				else:
+					if LEFT:
+							aiming = Vector2.LEFT
+							looking = aiming
+							parry.position.x = -35
+							sprite.play("staticL")
+							
+					if RIGHT:
+						aiming = Vector2.RIGHT
+						looking = aiming
+						parry.position.x = 120
+						sprite.play("staticR")
+						
+					if UP:
+						aiming = Vector2.UP
+						sprite.play("staticU")
+						
 			if DASH and !self.is_on_floor():
+				
 				if looking == Vector2.LEFT:
 					sprite.play("airDashL")
-				
+					walking = false
+					
 				if looking == Vector2.RIGHT:
 					sprite.play("airDashR")
-			
+					walking = false
+					
 			elif DASH:
+				
 				if looking == Vector2.LEFT:
 					sprite.play("dashL")
-				
+					walking = false
+					
 				if looking == Vector2.RIGHT:
 					sprite.play("dashR")
-			
+					walking = false
 
 
 

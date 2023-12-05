@@ -1,4 +1,4 @@
-[gd_scene load_steps=207 format=3 uid="uid://bws2jsk3nfnng"]
+[gd_scene load_steps=211 format=3 uid="uid://bws2jsk3nfnng"]
 
 [ext_resource type="Script" path="res://Script/baggy/baggy.gd" id="1_q05bf"]
 [ext_resource type="Texture2D" uid="uid://bv247feh6fppd" path="res://Sprite/gabi pj/dash.png" id="2_3r47m"]
@@ -22,7 +22,9 @@
 [ext_resource type="Script" path="res://Script/baggy/hurt.gd" id="14_mocvp"]
 [ext_resource type="Script" path="res://Script/baggy/parry.gd" id="15_0tolp"]
 [ext_resource type="Texture2D" uid="uid://db6ibes6d1ocf" path="res://Sprite/gabi pj/disparoquietoder1..png" id="15_0215d"]
+[ext_resource type="Texture2D" uid="uid://dfdggpulqeuaw" path="res://Sprite/gabi pj/disparoquietoizq2.png" id="15_w3eae"]
 [ext_resource type="Texture2D" uid="uid://ofks3kroc3iu" path="res://Sprite/gabi pj/disparoquiet.png" id="16_qulyt"]
+[ext_resource type="Texture2D" uid="uid://c12b6uj0sefvt" path="res://Sprite/gabi pj/disparoquietoder2.png" id="17_1lmly"]
 [ext_resource type="Texture2D" uid="uid://jg74v8uf852p" path="res://addons/BurstParticles2D/icon.svg" id="21_7t7x2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1jwfw"]
@@ -728,9 +730,17 @@ region = Rect2(2500, 0, 250, 250)
 atlas = ExtResource("14_gsc52")
 region = Rect2(0, 0, 211, 250)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ahg4b"]
+atlas = ExtResource("15_w3eae")
+region = Rect2(0, 0, 196, 250)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_bk55p"]
 atlas = ExtResource("15_0215d")
 region = Rect2(0, 0, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cevim"]
+atlas = ExtResource("17_1lmly")
+region = Rect2(0, 0, 229, 250)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6htv4"]
 atlas = ExtResource("16_qulyt")
@@ -1367,10 +1377,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ahg4b")
+}],
+"loop": true,
+"name": &"staticLD",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_bk55p")
 }],
 "loop": true,
 "name": &"staticR",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cevim")
+}],
+"loop": true,
+"name": &"staticRD",
 "speed": 5.0
 }, {
 "frames": [{
@@ -1404,7 +1430,7 @@ shape = SubResource("RectangleShape2D_1jwfw")
 
 [node name="sprite_baggy" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5jtvo")
-animation = &"shootRU"
+animation = &"staticRD"
 
 [node name="FSM" parent="." instance=ExtResource("3_jw38x")]
 
@@ -1484,7 +1510,7 @@ orbit_velocity_curve = SubResource("Curve_mgd42")
 color = Color(1, 0, 0, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
-volume_db = -10.0
+volume_db = 5.0
 
 [connection signal="timeout" from="Iframes" to="." method="_on_iframes_timeout"]
 [connection signal="timeout" from="Iframes" to="FSM/parry" method="_on_iframes_timeout"]
