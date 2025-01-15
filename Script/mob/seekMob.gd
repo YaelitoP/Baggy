@@ -5,12 +5,14 @@ extends baseState
 @onready var targetPos: Vector2
 @onready var targetDist: float
 @onready var shootDist: float = 500
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
 
+# Called when the node enters the scene tree for the first time.
+
+func _ready():
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _physics_update(_delta):
 	for i in mob.sight.get_overlapping_bodies():
 		if i.name == "baggy":
@@ -24,4 +26,4 @@ func _physics_update(_delta):
 
 func _on_sight_body_entered(_body):
 	exit(parent.SEEK)
-	pass # Replace with function body.
+	pass

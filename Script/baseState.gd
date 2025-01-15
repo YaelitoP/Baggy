@@ -9,6 +9,6 @@ class_name baseState
 func enter() -> void:
 	pass
 func exit(next_state) -> void:
-	parent.change_to(next_state)
+	fsm.change_to(next_state)
 	
 

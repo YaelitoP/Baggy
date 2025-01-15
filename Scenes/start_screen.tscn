@@ -1,0 +1,119 @@
+[gd_scene load_steps=8 format=3 uid="uid://bycnfhav7agpl"]
+
+[ext_resource type="Script" path="res://Script/start_screen.gd" id="1_ktkq4"]
+[ext_resource type="VideoStream" path="res://Sprite/startVideo/segundo.ogv" id="2_c5vll"]
+[ext_resource type="VideoStream" path="res://Sprite/startVideo/tercero.ogv" id="3_wpc3i"]
+[ext_resource type="AudioStream" uid="uid://bkf67cdnwwhj3" path="res://SFX/sleepingPills.wav" id="4_svy7s"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ycmte"]
+blend_mode = 2
+light_mode = 1
+
+[sub_resource type="VideoStreamTheora" id="VideoStreamTheora_rdv1o"]
+file = "res://Sprite/startVideo/primero.ogv"
+
+[sub_resource type="LabelSettings" id="LabelSettings_13lqk"]
+font_size = 30
+
+[node name="startScreen" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_ktkq4")
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color(0, 0, 0, 1)
+material = SubResource("CanvasItemMaterial_ycmte")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Container" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="primero" type="VideoStreamPlayer" parent="Container"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1088.0
+offset_top = -284.0
+offset_right = 2668.0
+offset_bottom = 796.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.486123, 0.514585)
+size_flags_horizontal = 0
+stream = SubResource("VideoStreamTheora_rdv1o")
+autoplay = true
+
+[node name="segundo" type="VideoStreamPlayer" parent="Container"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 1152.0
+offset_top = -228.0
+offset_right = 2229.0
+offset_bottom = 532.0
+grow_vertical = 2
+size_flags_horizontal = 0
+stream = ExtResource("2_c5vll")
+
+[node name="tercero" type="VideoStreamPlayer" parent="Container"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 1152.0
+offset_top = -284.0
+offset_right = 1709.0
+offset_bottom = 340.0
+grow_vertical = 2
+size_flags_horizontal = 0
+stream = ExtResource("3_wpc3i")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -2200.0
+offset_top = -244.0
+offset_right = -1232.0
+offset_bottom = 212.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "Es otra noche más, estoy cansado y no sé si hice suficiente...
+La realidad se va, dejando paso a mi imaginación; ahí soy menos yo, 
+soy Polvorín... Ganémosle al boss..."
+label_settings = SubResource("LabelSettings_13lqk")
+visible_characters_behavior = 1
+text_direction = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_svy7s")
+autoplay = true
+
+[connection signal="finished" from="Container/primero" to="." method="_on_video_stream_player_finished"]
+[connection signal="finished" from="Container/segundo" to="." method="_on_segundo_finished"]
+[connection signal="finished" from="Container/tercero" to="." method="_on_tercero_finished"]

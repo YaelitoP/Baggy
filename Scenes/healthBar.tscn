@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://ch8skj8aryuos"]
+
+[ext_resource type="Script" path="res://Script/healthBar.gd" id="1_4ljh6"]
+[ext_resource type="Texture2D" uid="uid://6m4jy4notv7u" path="res://Sprite/UI/vida.png" id="2_3wxnd"]
+
+[node name="healthBar" type="Control" groups=["ui"]]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 16.0
+offset_top = 24.0
+offset_right = 16.0
+offset_bottom = 24.0
+script = ExtResource("1_4ljh6")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Vida" type="Sprite2D" parent="HBoxContainer"]
+position = Vector2(84, 46)
+texture = ExtResource("2_3wxnd")
+
+[node name="Vida2" type="Sprite2D" parent="HBoxContainer"]
+position = Vector2(220, 46)
+texture = ExtResource("2_3wxnd")
+
+[node name="Vida3" type="Sprite2D" parent="HBoxContainer"]
+position = Vector2(356, 46)
+texture = ExtResource("2_3wxnd")
